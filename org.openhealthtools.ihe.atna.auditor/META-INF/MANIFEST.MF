@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Build-Jdk: 1.7.0_45
+Built-By: rnd
+Bundle-Version: 2.0.0.p2
+Tool: Bnd-0.0.357
+Bundle-Name: org.openhealthtools.ihe.atna.auditor
+Bnd-LastModified: 1411329098395
+Created-By: 1.7.0_45 (Oracle Corporation)
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.openhealthtools.ihe.org.openhealthtools.ihe.a
+ tna.auditor
+Originally-Created-By: Apache Maven
+Archiver-Version: Plexus Archiver
+
