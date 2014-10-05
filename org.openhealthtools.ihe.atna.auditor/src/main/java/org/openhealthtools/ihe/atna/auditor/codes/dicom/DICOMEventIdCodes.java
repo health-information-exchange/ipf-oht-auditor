@@ -26,7 +26,7 @@ public abstract class DICOMEventIdCodes extends CodedValueType
 	{
 		setCodeSystemName("DCM");
 		setCode(value);
-		setDisplayName(meaning);
+		setOriginalText(meaning);
 	}
 	
 	/**

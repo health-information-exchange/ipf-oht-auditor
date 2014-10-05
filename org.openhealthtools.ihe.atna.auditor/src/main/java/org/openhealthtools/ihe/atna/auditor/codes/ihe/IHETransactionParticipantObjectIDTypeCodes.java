@@ -32,7 +32,7 @@ public abstract class IHETransactionParticipantObjectIDTypeCodes extends CodedVa
 		
 		setCodeSystemName(codeSystemName);
 		setCode(value);
-		setDisplayName(meaning);
+		setOriginalText(meaning);
 	}
 	
 

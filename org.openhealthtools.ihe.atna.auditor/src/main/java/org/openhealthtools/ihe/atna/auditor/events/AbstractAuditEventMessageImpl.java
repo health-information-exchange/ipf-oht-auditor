@@ -304,7 +304,7 @@ public abstract class AbstractAuditEventMessageImpl implements AuditEventMessage
 		AuditSourceIdentificationType sourceBlock = new AuditSourceIdentificationType();
 		
 		if (!EventUtils.isEmptyOrNull(typeCodes, true)) {
-			sourceBlock.getAuditSourceTypeCode().addAll(Arrays.asList(typeCodes));
+			sourceBlock.setAuditSourceTypeCode(typeCodes[0]);
 		}
 		sourceBlock.setAuditSourceID(sourceID);
 		sourceBlock.setAuditEnterpriseSiteID(enterpriseSiteID);

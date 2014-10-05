@@ -13,7 +13,7 @@ package org.openhealthtools.ihe.atna.auditor.codes.rfc3881;
 import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 
 /**
- * Audit Source Type Codes defined by RFC 3881
+ * Audit Source Type Codes
  * 
  * @author <a href="mailto:mattadav@us.ibm.com">Matthew Davis</a>
  * @since OHT IHE Profiles 0.4.0
@@ -22,8 +22,8 @@ public abstract class RFC3881AuditSourceTypeCodes extends CodedValueType
 {
 	protected RFC3881AuditSourceTypeCodes(String value, String displayName)
 	{
-		setCodeSystemName("RFC-3881");
-		setDisplayName(displayName);
+		setCodeSystemName("DCM");
+		setOriginalText(displayName);
 		setCode(value);
 	}
 	
@@ -37,7 +37,7 @@ public abstract class RFC3881AuditSourceTypeCodes extends CodedValueType
 		 */
 		public EndUserDisplayDevice()
 		{
-			super("1", "End User Display Device");
+			super("1", "End User Display Device or Diagnostic Device");
 		}
 	}
 	
@@ -51,7 +51,7 @@ public abstract class RFC3881AuditSourceTypeCodes extends CodedValueType
 		 */
 		public DataAcquisitionDevice()
 		{
-			super("2", "Data Acquisition Device");
+			super("2", "Data Acquisition Device or Instrument");
 		}
 	}
 	
@@ -65,7 +65,7 @@ public abstract class RFC3881AuditSourceTypeCodes extends CodedValueType
 		 */
 		public WebServerProcess()
 		{
-			super("3", "Web Server Process");
+			super("3", "Web Server Process or Thread");
 		}
 	}
 	
@@ -79,7 +79,7 @@ public abstract class RFC3881AuditSourceTypeCodes extends CodedValueType
 		 */
 		public ApplicationServerProcess()
 		{
-			super("4", "Application Server Process");
+			super("4", "Application Server Process or Thread");
 		}
 	}
 	
@@ -93,7 +93,7 @@ public abstract class RFC3881AuditSourceTypeCodes extends CodedValueType
 		 */
 		public DatabaseServerProcess()
 		{
-			super("5", "Database Server Process");
+			super("5", "Database Server Process or Thread");
 		}
 	}
 	
@@ -142,14 +142,14 @@ public abstract class RFC3881AuditSourceTypeCodes extends CodedValueType
 	/**
 	 * "9", "External Source"
 	 */
-	public static class ExternalSource extends RFC3881AuditSourceTypeCodes
+	public static class Other extends RFC3881AuditSourceTypeCodes
 	{
 		/**
 		 * "9", "External Source"
 		 */
-		public ExternalSource()
+		public Other()
 		{
-			super("9", "External Source");
+			super("9", "Other");
 		}
 	}
 }

@@ -82,7 +82,7 @@ public class EventUtils
 	{
 		if (null != codeToCheck) {
 			if (codesToCheckAgainst.contains(codeToCheck.getCode()) ||
-					codesToCheckAgainst.contains(codeToCheck.getDisplayName())) {
+					codesToCheckAgainst.contains(codeToCheck.getOriginalText())) {
 				return true;
 			}
 		}

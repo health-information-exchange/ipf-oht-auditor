@@ -19,12 +19,7 @@
 
 package org.openhealthtools.ihe.atna.auditor.models.rfc3881;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.commons.lang.StringEscapeUtils;
-import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
 
 
 /**
@@ -75,7 +70,7 @@ import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
 public class AuditSourceIdentificationType {
 
     //@XmlElement(name = "AuditSourceTypeCode")
-    protected List<CodedValueType> auditSourceTypeCode;
+    protected CodedValueType auditSourceTypeCode;
     //@XmlAttribute(name = "AuditEnterpriseSiteID")
     protected String auditEnterpriseSiteID;
     //@XmlAttribute(name = "AuditSourceID", required = true)
@@ -83,44 +78,46 @@ public class AuditSourceIdentificationType {
 
     public String toString(boolean useSpacing)
     {
-    	boolean hasChildElement = false;
-    	if (!EventUtils.isEmptyOrNull(auditSourceTypeCode)) {
-    		hasChildElement = true;
-    	}
-    	
-    	StringBuffer sb = new StringBuffer();
+    	StringBuilder sb = new StringBuilder();
     	if (useSpacing) {
     		sb.append("\n");
     	}
     	sb.append("<AuditSourceIdentification");
+        if (auditSourceTypeCode == null) {
+            sb.append(" code=\"9\"");       // use "other" as the default event source type
+        } else {
+            sb.append(" code=\"")
+              .append(StringEscapeUtils.escapeXml(auditSourceTypeCode.getCode()))
+              .append('"');
+            if (auditSourceTypeCode.getCodeSystemName() != null) {
+                sb.append(" codeSystemName=\"")
+                  .append(StringEscapeUtils.escapeXml(auditSourceTypeCode.getCodeSystemName()))
+                  .append('"');
+            }
+            if (auditSourceTypeCode.getOriginalText() != null) {
+                sb.append(" originalText=\"")
+                  .append(StringEscapeUtils.escapeXml(auditSourceTypeCode.getOriginalText()))
+                  .append('"');
+            }
+        }
+
     	//AuditEnterpriseSiteID
     	if (auditEnterpriseSiteID != null) {
 	    	sb.append(" AuditEnterpriseSiteID=\"");
 	    	sb.append(StringEscapeUtils.escapeXml(auditEnterpriseSiteID));
 	    	sb.append("\"");
     	}
+
     	//AuditSourceID
-    	if (auditSourceID != null) {
-	    	sb.append(" AuditSourceID=\"");
-	    	sb.append(StringEscapeUtils.escapeXml(auditSourceID));
-	    	sb.append("\"");
-    	}
-    	
-    	if (!hasChildElement) {
-    		sb.append("/>");
-    	} else {
-    		Iterator<CodedValueType> i = auditSourceTypeCode.iterator();
-    		while (i.hasNext()) {
-    	    	if (useSpacing) {
-    	    		sb.append("\n");
-    	    	}
-    			sb.append(i.next().toString("AuditSourceTypeCode"));
-    		}
-        	if (useSpacing) {
-        		sb.append("\n");
-        	}
-	    	sb.append("</AuditSourceIdentification>");
-    	}
+        sb.append(" AuditSourceID=\"");
+        if ((auditSourceID != null) && ! auditSourceID.isEmpty()) {
+            sb.append(StringEscapeUtils.escapeXml(auditSourceID));
+        } else {
+            sb.append("unknown");
+        }
+        sb.append("\"");
+
+        sb.append("/>");
     	return sb.toString();
     }
     
@@ -128,34 +125,19 @@ public class AuditSourceIdentificationType {
     {
     	return toString(true);
     }
-    
+
     /**
      * Gets the value of the auditSourceTypeCode property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the auditSourceTypeCode property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getAuditSourceTypeCode().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link AuditSourceIdentificationType.AuditSourceTypeCode }
-     * 
-     * 
      */
-    public List<CodedValueType> getAuditSourceTypeCode() {
-        if (auditSourceTypeCode == null) {
-            auditSourceTypeCode = new ArrayList<CodedValueType>();
-        }
+    public CodedValueType getAuditSourceTypeCode() {
         return this.auditSourceTypeCode;
+    }
+
+    /**
+     * Sets the value of the auditSourceTypeCode property.
+     */
+    public void setAuditSourceTypeCode(CodedValueType auditSourceTypeCode) {
+        this.auditSourceTypeCode = auditSourceTypeCode;
     }
 
     /**
@@ -205,46 +187,5 @@ public class AuditSourceIdentificationType {
     public void setAuditSourceID(String value) {
         this.auditSourceID = value;
     }
-
-
-    /**
-     * <p>Java class for anonymous complex type.
-     * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{}CodedValueType">
-     *       &lt;attribute name="code" use="required">
-     *         &lt;simpleType>
-     *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
-     *             &lt;enumeration value="1"/>
-     *             &lt;enumeration value="2"/>
-     *             &lt;enumeration value="3"/>
-     *             &lt;enumeration value="4"/>
-     *             &lt;enumeration value="5"/>
-     *             &lt;enumeration value="6"/>
-     *             &lt;enumeration value="7"/>
-     *             &lt;enumeration value="8"/>
-     *             &lt;enumeration value="9"/>
-     *           &lt;/restriction>
-     *         &lt;/simpleType>
-     *       &lt;/attribute>
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
-     * 
-     * 
-     */
-//    @XmlAccessorType(XmlAccessType.FIELD)
-//    @XmlType(name = "")
-//    public static class AuditSourceTypeCode
-//        extends CodedValueType
-//    {
-//
-//
-//    }
 
 }

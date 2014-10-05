@@ -26,7 +26,7 @@ public abstract class DICOMParticipantObjectIDTypeCode extends CodedValueType
 	{
 		setCodeSystemName("DCM");
 		setCode(value);
-		setDisplayName(meaning);
+		setOriginalText(meaning);
 	}
 	/**
 	 *  "DCM","110180", "Study Instance UID"

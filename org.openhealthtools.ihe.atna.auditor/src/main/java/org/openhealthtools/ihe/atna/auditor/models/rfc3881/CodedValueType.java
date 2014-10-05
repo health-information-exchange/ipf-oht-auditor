@@ -51,8 +51,6 @@ public class CodedValueType {
     //@XmlAttribute(required = true)
     protected String code;
     //@XmlAttribute
-    protected String displayName;
-    //@XmlAttribute
     protected String originalText;
     //@XmlAttribute
     protected String codeSystem;
@@ -65,32 +63,25 @@ public class CodedValueType {
     	StringBuffer sb = new StringBuffer();
     	sb.append("<"+ tagName);
     	//code
-    	sb.append(" code=\"");
+    	sb.append(" csd-code=\"");
     	sb.append(code);
     	sb.append("\"");
-    	//displayName
-    	if (displayName != null) {
-	    	sb.append(" displayName=\"");
-	    	sb.append(StringEscapeUtils.escapeXml(displayName));
-	    	sb.append("\"");
-    	}
+
     	//originalText
     	if (originalText != null) {
-  
 	    	sb.append(" originalText=\"");
 	    	sb.append(StringEscapeUtils.escapeXml(originalText));
 	    	sb.append("\"");
     	}
+
     	//codeSystem
     	if (codeSystem != null) {
-  
 	    	sb.append(" codeSystem=\"");
 	    	sb.append(StringEscapeUtils.escapeXml(codeSystem));
 	    	sb.append("\"");
     	}
     	//codeSystemName
     	if (codeSystemName != null) {
-  
 	    	sb.append(" codeSystemName=\"");
 	    	sb.append(StringEscapeUtils.escapeXml(codeSystemName));
 	    	sb.append("\"");
@@ -122,30 +113,6 @@ public class CodedValueType {
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    /**
-     * Gets the value of the displayName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    /**
-     * Sets the value of the displayName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDisplayName(String value) {
-        this.displayName = value;
     }
 
     /**

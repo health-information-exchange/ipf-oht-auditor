@@ -114,12 +114,10 @@ public class ActiveParticipantType {
 	    	sb.append("\"");
     	}
     	//UserIsRequestor
-    	if (userIsRequestor != null) {
-	    	sb.append(" UserIsRequestor=\"");
-	    	sb.append(Boolean.toString(userIsRequestor));
-	    	sb.append("\"");
-    	}
-    	
+        sb.append(" UserIsRequestor=\"");
+        sb.append(Boolean.toString((userIsRequestor != null) && userIsRequestor));
+        sb.append("\"");
+
     	//NetworkAccessPointID
     	if (networkAccessPointID != null) {
 	    	sb.append(" NetworkAccessPointID=\"");

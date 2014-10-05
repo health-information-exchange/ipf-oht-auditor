@@ -267,10 +267,10 @@ public abstract class RFC3881ParticipantObjectCodes
 	 */
 	public static class RFC3881ParticipantObjectIDTypeCodes extends CodedValueType
 	{
-		protected RFC3881ParticipantObjectIDTypeCodes(String value, String displayName)
+		protected RFC3881ParticipantObjectIDTypeCodes(String value, String originalText)
 		{
 			setCodeSystemName("RFC-3881");
-			setDisplayName(displayName);
+			setOriginalText(originalText);
 			setCode(value);
 		}
 		

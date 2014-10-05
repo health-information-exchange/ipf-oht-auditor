@@ -32,7 +32,7 @@ public abstract class IHETransactionEventTypeCodes extends CodedValueType
 		
 		setCodeSystemName("IHE Transactions");
 		setCode(value);
-		setDisplayName(meaning);
+		setOriginalText(meaning);
 	}
 	
 

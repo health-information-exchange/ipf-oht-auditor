@@ -25,7 +25,7 @@ public abstract class DICOMActiveParticipantRoleIdCodes extends CodedValueType
 	{
 		setCodeSystemName("DCM");
 		setCode(value);
-		setDisplayName(meaning);
+		setOriginalText(meaning);
 	}
 	/**
 	 * "DCM","110150", "Application"

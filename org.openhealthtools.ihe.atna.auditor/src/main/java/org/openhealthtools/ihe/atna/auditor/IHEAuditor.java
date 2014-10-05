@@ -516,7 +516,7 @@ public class IHEAuditor
 		CodedValueType eventIdCode = msg.getAuditMessage().getEventIdentification().getEventID();
 		if (EventUtils.containsCode(eventIdCode, getConfig().getDisabledEvents())) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("Auditor is disabled by configuration for event " + eventIdCode.getDisplayName() + " (" + eventIdCode.getCode() + ")");
+				LOGGER.debug("Auditor is disabled by configuration for event " + eventIdCode.getOriginalText() + " (" + eventIdCode.getCode() + ")");
 			}
 			return false;
 		}
@@ -549,7 +549,7 @@ public class IHEAuditor
 	{
 		if (EventUtils.containsCode(code, getConfig().getDisabledIHETransactions())) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("Auditor is disabled by configuration for IHE transaction " + code.getDisplayName() + " (" + code.getCode() + ")");
+				LOGGER.debug("Auditor is disabled by configuration for IHE transaction " + code.getOriginalText() + " (" + code.getCode() + ")");
 			}
 			return false;
 		}
@@ -618,7 +618,7 @@ public class IHEAuditor
 	 * 
 	 * @param eventOutcome Event Outcome Indicator
 	 * @param actorName	Application Participant User ID (Actor Name)
-	 * @param actorStarter Application Starter Participant User ID (Actor Starter Name)
+	 * @param actorStopper Application Starter Participant User ID (Actor Starter Name)
 	 */
 	public void auditActorStopEvent(RFC3881EventOutcomeCodes eventOutcome, String actorName, String actorStopper) 
 	{
