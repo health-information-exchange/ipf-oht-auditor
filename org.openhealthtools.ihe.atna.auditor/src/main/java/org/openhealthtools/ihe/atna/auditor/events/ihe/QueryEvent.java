@@ -72,14 +72,16 @@ public class QueryEvent extends GenericIHEAuditEventMessage
 			}
 		}
 		// need to check null or "" because it is known to be passed as "" sometimes
-		if (messageIdentifier != null && !messageIdentifier.equals("")){
+        boolean isXdsQuery = transaction.getCode().equals("ITI-18") || transaction.getCode().equals("ITI-38") || transaction.getCode().equals("ITI-63");
+		if (isXdsQuery && messageIdentifier != null && !messageIdentifier.equals("")){
 			// this is true ONLY for Stored Query messages
 			// set to the system's default charset because that's what we used to getBytes()
 			// from the query message
 			tvp.add(getTypeValuePair("QueryEncoding", java.nio.charset.Charset.defaultCharset().name().getBytes()));
 		}
 		if (homeCommunityId != null){
-			tvp.add(getTypeValuePair("ihe:homeCommunityID", homeCommunityId.getBytes()));
+            String type = isXdsQuery ? "urn:ihe:iti:xca:2010:homeCommunityId" : "ihe:homeCommunityID";
+			tvp.add(getTypeValuePair(type, homeCommunityId.getBytes()));
 		}
 		this.addParticipantObjectIdentification(
 				this.eventType, 
@@ -93,19 +95,6 @@ public class QueryEvent extends GenericIHEAuditEventMessage
 				null);
 	}
 	
-	public void addXCPDParticipantObject(String queryId, String homeCommunityId, byte[] queryByParameterBytes){
-		this.addParticipantObjectIdentification(
-				this.eventType, 
-				homeCommunityId, 
-				queryByParameterBytes, 
-				null,
-				queryId,
-				RFC3881ParticipantObjectTypeCodes.SYSTEM, 
-				RFC3881ParticipantObjectTypeRoleCodes.QUERY,
-				null, 
-				null);
-	}
-
     public void addQedParticipantObject(String queryId, byte[] queryByParameterBytes) {
         addParticipantObjectIdentification(
                 this.eventType,

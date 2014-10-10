@@ -103,7 +103,8 @@ public class XCPDInitiatingGatewayAuditor extends IHEAuditor
 				queryByParameterBytes = queryByParameter.getBytes();
 			}
 		}
-		queryEvent.addXCPDParticipantObject(null, homeCommunityId, queryByParameterBytes);
+		queryEvent.addQueryParticipantObject(null, homeCommunityId, queryByParameterBytes, null,
+                new IHETransactionEventTypeCodes.CrossGatewayQuery());
 		
 		audit(queryEvent);
 	}
