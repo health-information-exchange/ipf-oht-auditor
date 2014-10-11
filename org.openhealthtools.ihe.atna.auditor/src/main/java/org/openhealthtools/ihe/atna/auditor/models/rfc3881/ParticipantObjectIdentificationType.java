@@ -244,9 +244,9 @@ public class ParticipantObjectIdentificationType {
     			sb.append(StringEscapeUtils.escapeXml(new String(EventUtils.encodeBase64(participantObjectQuery))));
     			sb.append("</ParticipantObjectQuery>");
     		}
-            if (EventUtils.isEmptyOrNull(participantObjectName) && EventUtils.isEmptyOrNull(participantObjectQuery)) {
-                sb.append("<ParticipantObjectName/>");
-            }
+//            if (EventUtils.isEmptyOrNull(participantObjectName) && EventUtils.isEmptyOrNull(participantObjectQuery)) {
+//                sb.append("<ParticipantObjectName/>");
+//            }
     		if (!EventUtils.isEmptyOrNull(participantObjectDetail)) {
         		Iterator<TypeValuePairType> i = participantObjectDetail.iterator();
         		while (i.hasNext()) {
@@ -257,8 +257,8 @@ public class ParticipantObjectIdentificationType {
         		}
     		}
 
-            sb.append("\n<SOPClass UID=\"unknown\" NumberOfInstances=\"0\"/>");
-            sb.append("\n<ParticipantObjectContainsStudy/>");
+//            sb.append("\n<SOPClass UID=\"unknown\" NumberOfInstances=\"0\"/>");
+//            sb.append("\n<ParticipantObjectContainsStudy/>");
 
         	if (useSpacing) {
         		sb.append("\n");
