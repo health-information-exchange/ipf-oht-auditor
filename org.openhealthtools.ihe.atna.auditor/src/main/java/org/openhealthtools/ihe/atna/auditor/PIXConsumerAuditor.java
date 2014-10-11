@@ -15,7 +15,10 @@ import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCod
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+
+import java.util.List;
 
 /**
  * Implementation of a PIX Auditor to send audit messages for
@@ -63,7 +66,7 @@ public class PIXConsumerAuditor extends PIXAuditor
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String sendingFacility, String sendingApp,
 			String hl7MessageControlId, String hl7QueryParameters, 
-			String[] patientIds) 
+			String[] patientIds)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -74,7 +77,7 @@ public class PIXConsumerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, null, EventUtils.getAddressForUrl(pixManagerUri, false), 
 				getHumanRequestor(), 
 				hl7MessageControlId, hl7QueryParameters, 
-				patientIds);
+				patientIds, null);
 	}
 	
 	/**
@@ -95,7 +98,7 @@ public class PIXConsumerAuditor extends PIXAuditor
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String sendingFacility, String sendingApp,
 			String hl7MessageId, String hl7QueryParameters, 
-			String[] patientIds) 
+			String[] patientIds, List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -106,7 +109,7 @@ public class PIXConsumerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, null, EventUtils.getAddressForUrl(pixManagerUri, false), 
 				getHumanRequestor(), 
 				hl7MessageId, hl7QueryParameters, 
-				patientIds);
+				patientIds, purposesOfUse);
 	}
 	
 	/**
@@ -126,7 +129,7 @@ public class PIXConsumerAuditor extends PIXAuditor
 			String pixMgrIpAddress, String sendingFacility, String sendingApp, 
 			String receivingFacility, String receivingApp,
 			String hl7MessageControlId, 
-			String[] patientIds) 
+			String[] patientIds)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -137,7 +140,7 @@ public class PIXConsumerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, getSystemAltUserId(), getSystemNetworkId(), 
 				null, 
 				hl7MessageControlId, 
-				patientIds);
+				patientIds, null);
 	}
 	
 	/**
@@ -157,7 +160,8 @@ public class PIXConsumerAuditor extends PIXAuditor
 			String pixMgrIpAddress, String sendingFacility, String sendingApp, 
 			String receivingFacility, String receivingApp,
 			String hl7MessageId, 
-			String[] patientIds) 
+			String[] patientIds,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -168,6 +172,6 @@ public class PIXConsumerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, getSystemAltUserId(), getSystemNetworkId(), 
 				null, 
 				hl7MessageId, 
-				patientIds);
+				patientIds, purposesOfUse);
 	}
 }

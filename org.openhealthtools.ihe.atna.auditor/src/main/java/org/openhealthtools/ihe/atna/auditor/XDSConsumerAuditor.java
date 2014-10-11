@@ -11,11 +11,13 @@
 package org.openhealthtools.ihe.atna.auditor;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.ImportEvent;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
 
 /**
@@ -60,7 +62,7 @@ public class XDSConsumerAuditor extends XDSAuditor
 			String registryEndpointUri,
             String consumerUserName,
 			String adhocQueryRequestPayload,
-			String patientId) 
+			String patientId)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -72,7 +74,7 @@ public class XDSConsumerAuditor extends XDSAuditor
 				consumerUserName, consumerUserName, true,
 				registryEndpointUri, null,
 				"", adhocQueryRequestPayload, "", 
-				patientId);
+				patientId, null);
 
 	}
 
@@ -92,7 +94,8 @@ public class XDSConsumerAuditor extends XDSAuditor
 			String registryEndpointUri,
             String consumerUserName,
 			String storedQueryUUID, String adhocQueryRequestPayload, String homeCommunityId,
-			String patientId) 
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -111,7 +114,7 @@ public class XDSConsumerAuditor extends XDSAuditor
 				consumerUserName, consumerUserName, false,
 				registryEndpointUri, null,
 				storedQueryUUID, adhocQueryRequestPayload, homeCommunityId, 
-				patientId);
+				patientId, purposesOfUse);
 	}
 
 
@@ -127,12 +130,12 @@ public class XDSConsumerAuditor extends XDSAuditor
 			String repositoryRetrieveUri,
             String userName,
 			String documentUniqueId,
-			String patientId) 
+			String patientId)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
-		ImportEvent importEvent = new ImportEvent(false, eventOutcome, new IHETransactionEventTypeCodes.RetrieveDocument());
+		ImportEvent importEvent = new ImportEvent(false, eventOutcome, new IHETransactionEventTypeCodes.RetrieveDocument(), null);
 		importEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		importEvent.addSourceActiveParticipant(repositoryRetrieveUri, null, null, EventUtils.getAddressForUrl(repositoryRetrieveUri, false), false);
 		importEvent.addDestinationActiveParticipant(getSystemUserId(), getSystemAltUserId(), getSystemUserName(), getSystemNetworkId(), true);
@@ -162,7 +165,8 @@ public class XDSConsumerAuditor extends XDSAuditor
 			String repositoryEndpointUri,
             String userName,
 			String[] documentUniqueIds, String repositoryUniqueId, String homeCommunityId, 
-			String patientId) 
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -176,7 +180,7 @@ public class XDSConsumerAuditor extends XDSAuditor
 		
 		auditRetrieveDocumentSetEvent(eventOutcome, repositoryEndpointUri,
                 userName,
-                documentUniqueIds, repositoryUniqueIds, homeCommunityId, patientId);
+                documentUniqueIds, repositoryUniqueIds, homeCommunityId, patientId, purposesOfUse);
 	}
 	
 	/**
@@ -194,7 +198,8 @@ public class XDSConsumerAuditor extends XDSAuditor
 			String repositoryEndpointUri,
             String userName,
 			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId, 
-			String patientId) 
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -208,7 +213,7 @@ public class XDSConsumerAuditor extends XDSAuditor
 		
 		auditRetrieveDocumentSetEvent(eventOutcome, repositoryEndpointUri,
                 userName,
-                documentUniqueIds, repositoryUniqueIds, homeCommunityIds, patientId);
+                documentUniqueIds, repositoryUniqueIds, homeCommunityIds, patientId, purposesOfUse);
 	}
 	
 	/**
@@ -226,12 +231,13 @@ public class XDSConsumerAuditor extends XDSAuditor
 			String repositoryEndpointUri,
             String userName,
 			String[] documentUniqueIds, String[] repositoryUniqueIds, String[] homeCommunityIds, 
-			String patientId) 
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
-		ImportEvent importEvent = new ImportEvent(false, eventOutcome, new IHETransactionEventTypeCodes.RetrieveDocumentSet());
+		ImportEvent importEvent = new ImportEvent(false, eventOutcome, new IHETransactionEventTypeCodes.RetrieveDocumentSet(), purposesOfUse);
 		importEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		importEvent.addSourceActiveParticipant(repositoryEndpointUri, null, null, EventUtils.getAddressForUrl(repositoryEndpointUri, false), false);
 		/*

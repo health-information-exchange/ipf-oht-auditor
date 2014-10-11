@@ -14,7 +14,10 @@ import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCod
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.ImportEvent;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+
+import java.util.List;
 
 /**
  * Implementation of a XDS Auditor to send audit messages for
@@ -61,7 +64,7 @@ public class XDSRegistryAuditor extends XDSAuditor
             String userName,
 			String registryEndpointUri,
 			String submissionSetUniqueId, 
-			String patientId) 
+			String patientId)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -69,7 +72,7 @@ public class XDSRegistryAuditor extends XDSAuditor
 		auditRegisterEvent(new IHETransactionEventTypeCodes.RegisterDocumentSet(), eventOutcome,
                 repositoryUserId, repositoryIpAddress,
                 userName,
-                registryEndpointUri, submissionSetUniqueId, patientId);
+                registryEndpointUri, submissionSetUniqueId, patientId, null);
 	}
 
 	/**
@@ -88,7 +91,7 @@ public class XDSRegistryAuditor extends XDSAuditor
 			String consumerUserId, String consumerUserName, String consumerIpAddress,
 			String registryEndpointUri, 
 			String adhocQueryRequestPayload,
-			String patientId) 
+			String patientId)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -100,7 +103,7 @@ public class XDSRegistryAuditor extends XDSAuditor
 				consumerUserName, consumerUserName, true,
 				registryEndpointUri, getSystemAltUserId(), 
 				"", adhocQueryRequestPayload, "", 
-				patientId);
+				patientId, null);
 	}
 
 	/**
@@ -121,7 +124,7 @@ public class XDSRegistryAuditor extends XDSAuditor
 			String consumerUserId, String consumerUserName, String consumerIpAddress,
 			String registryEndpointUri, 
 			String storedQueryUUID, String adhocQueryRequestPayload, String homeCommunityId,
-			String patientId) 
+			String patientId, List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -133,7 +136,7 @@ public class XDSRegistryAuditor extends XDSAuditor
 				consumerUserName, consumerUserName, false,
 				registryEndpointUri, getSystemAltUserId(), 
 				storedQueryUUID, adhocQueryRequestPayload, homeCommunityId, 
-				patientId);
+				patientId, purposesOfUse);
 	}
 
 	/**
@@ -152,7 +155,8 @@ public class XDSRegistryAuditor extends XDSAuditor
             String userName,
 			String registryEndpointUri,
 			String submissionSetUniqueId, 
-			String patientId) 
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -160,7 +164,7 @@ public class XDSRegistryAuditor extends XDSAuditor
 		auditRegisterEvent(new IHETransactionEventTypeCodes.RegisterDocumentSetB(),
                 eventOutcome, repositoryUserId, repositoryIpAddress,
                 userName,
-                registryEndpointUri, submissionSetUniqueId, patientId);
+                registryEndpointUri, submissionSetUniqueId, patientId, purposesOfUse);
 	}
 	
 	/**
@@ -181,9 +185,10 @@ public class XDSRegistryAuditor extends XDSAuditor
             String userName,
 			String registryEndpointUri,
 			String submissionSetUniqueId, 
-			String patientId)
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
-		ImportEvent importEvent = new ImportEvent(false, eventOutcome, transaction);
+		ImportEvent importEvent = new ImportEvent(false, eventOutcome, transaction, purposesOfUse);
 		importEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		importEvent.addSourceActiveParticipant(repositoryUserId, null, null, repositoryIpAddress, true);
         if (! EventUtils.isEmptyOrNull(userName)) {

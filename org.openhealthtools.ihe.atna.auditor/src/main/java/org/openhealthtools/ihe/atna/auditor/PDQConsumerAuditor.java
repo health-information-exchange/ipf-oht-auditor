@@ -14,7 +14,10 @@ package org.openhealthtools.ihe.atna.auditor;
 import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+
+import java.util.List;
 
 /**
  * Implementation of a PIX Auditor to send audit messages for
@@ -61,7 +64,7 @@ public class PDQConsumerAuditor extends PIXAuditor
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String sendingFacility, String sendingApp,
 			String hl7MessageControlId, String hl7QueryParameters, 
-			String[] patientIds) 
+			String[] patientIds)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -72,7 +75,7 @@ public class PDQConsumerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, null, EventUtils.getAddressForUrl(pixManagerUri, false), 
 				getHumanRequestor(), 
 				hl7MessageControlId, hl7QueryParameters, 
-				patientIds);
+				patientIds, null);
 	}
 	
 	/**
@@ -93,7 +96,7 @@ public class PDQConsumerAuditor extends PIXAuditor
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String sendingFacility, String sendingApp,
 			String hl7MessageId, String hl7QueryParameters, 
-			String[] patientIds) 
+			String[] patientIds, List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -104,7 +107,7 @@ public class PDQConsumerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, null, EventUtils.getAddressForUrl(pixManagerUri, false), 
 				getHumanRequestor(), 
 				hl7MessageId, hl7QueryParameters, 
-				patientIds);
+				patientIds, purposesOfUse);
 	}
 	
 	/**
@@ -125,7 +128,7 @@ public class PDQConsumerAuditor extends PIXAuditor
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String sendingFacility, String sendingApp,
 			String hl7MessageControlId, String hl7QueryParameters, 
-			String[] patientIds) 
+			String[] patientIds)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -136,7 +139,7 @@ public class PDQConsumerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, null, EventUtils.getAddressForUrl(pixManagerUri, false), 
 				getHumanRequestor(), 
 				hl7MessageControlId, hl7QueryParameters, 
-				patientIds);
+				patientIds, null);
 	}
 
 }

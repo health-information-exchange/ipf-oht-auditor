@@ -14,7 +14,10 @@ import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCod
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.ExportEvent;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+
+import java.util.List;
 
 /**
  * Implementation of a XDS Auditor to send audit messages for
@@ -64,7 +67,8 @@ public class XCARespondingGatewayAuditor extends XDSAuditor
 			String initiatingGatewayUserId, String initiatingGatewayUserName, String initiatingGatewayIpAddress,
 			String respondingGatewayEndpointUri, 
 			String storedQueryUUID, String adhocQueryRequestPayload, String homeCommunityId,
-			String patientId) 
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -76,7 +80,7 @@ public class XCARespondingGatewayAuditor extends XDSAuditor
 				initiatingGatewayUserName, initiatingGatewayUserName, false,
 				respondingGatewayEndpointUri, getSystemAltUserId(), 
 				storedQueryUUID, adhocQueryRequestPayload, homeCommunityId, 
-				patientId);
+				patientId, purposesOfUse);
 	}
 	
 	/**
@@ -96,12 +100,13 @@ public class XCARespondingGatewayAuditor extends XDSAuditor
 			String initiatingGatewayUserId, String initiatingGatewayIpAddress,
 			String respondingGatewayEndpointUri,
             String initiatingGatewayUserName,
-			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId) 
+			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
-		ExportEvent exportEvent = new ExportEvent(true, eventOutcome, new IHETransactionEventTypeCodes.CrossGatewayRetrieve());
+		ExportEvent exportEvent = new ExportEvent(true, eventOutcome, new IHETransactionEventTypeCodes.CrossGatewayRetrieve(), purposesOfUse);
 		exportEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		exportEvent.addSourceActiveParticipant(respondingGatewayEndpointUri, getSystemAltUserId(), null, EventUtils.getAddressForUrl(respondingGatewayEndpointUri, false), false);
 
@@ -133,14 +138,15 @@ public class XCARespondingGatewayAuditor extends XDSAuditor
 	public void auditRetrieveDocumentSetEvent(RFC3881EventOutcomeCodes eventOutcome, 
 			String repositoryEndpointUri,
             String userName,
-			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId)
+			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
 		XDSConsumerAuditor.getAuditor().auditRetrieveDocumentSetEvent(eventOutcome, repositoryEndpointUri,
                 userName,
-                documentUniqueIds,  repositoryUniqueIds, homeCommunityId, null);
+                documentUniqueIds,  repositoryUniqueIds, homeCommunityId, null, purposesOfUse);
 	}
 	
 	/**
@@ -158,14 +164,15 @@ public class XCARespondingGatewayAuditor extends XDSAuditor
 			String registryEndpointUri,
             String consumerUserName,
 			String storedQueryUUID, String adhocQueryRequestPayload, String homeCommunityId,
-			String patientId) 
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
 		XDSConsumerAuditor.getAuditor().auditRegistryStoredQueryEvent(eventOutcome, registryEndpointUri,
                 consumerUserName, storedQueryUUID, adhocQueryRequestPayload,
-                homeCommunityId, patientId);
+                homeCommunityId, patientId, purposesOfUse);
 	}
 
 }

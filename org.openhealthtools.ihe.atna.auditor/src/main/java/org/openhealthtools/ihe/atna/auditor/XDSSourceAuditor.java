@@ -14,7 +14,10 @@ import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCod
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.ExportEvent;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+
+import java.util.List;
 
 /**
  * Implementation of a XDS Auditor to send audit messages for
@@ -55,7 +58,7 @@ public class XDSSourceAuditor extends XDSAuditor
 			String repositoryEndpointUri,
             String userName,
 			String submissionSetUniqueId, 
-			String patientId) 
+			String patientId)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -63,7 +66,7 @@ public class XDSSourceAuditor extends XDSAuditor
 		auditProvideAndRegisterEvent( new IHETransactionEventTypeCodes.ProvideAndRegisterDocumentSet(),
                 eventOutcome, repositoryEndpointUri,
                 userName,
-                submissionSetUniqueId, patientId);
+                submissionSetUniqueId, patientId, null);
 	}
 	
 	/**
@@ -78,7 +81,8 @@ public class XDSSourceAuditor extends XDSAuditor
 			String repositoryEndpointUri,
             String userName,
 			String submissionSetUniqueId, 
-			String patientId) 
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{	
 		if (!isAuditorEnabled()) {
 			return;
@@ -86,7 +90,7 @@ public class XDSSourceAuditor extends XDSAuditor
 		auditProvideAndRegisterEvent( new IHETransactionEventTypeCodes.ProvideAndRegisterDocumentSetB(),
                 eventOutcome, repositoryEndpointUri,
                 userName,
-                submissionSetUniqueId, patientId);
+                submissionSetUniqueId, patientId, purposesOfUse);
 	}
 	
 	/**
@@ -103,9 +107,10 @@ public class XDSSourceAuditor extends XDSAuditor
 			String repositoryEndpointUri,
             String userName,
 			String submissionSetUniqueId, 
-			String patientId)
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
-		ExportEvent exportEvent = new ExportEvent(true, eventOutcome, transaction);
+		ExportEvent exportEvent = new ExportEvent(true, eventOutcome, transaction, purposesOfUse);
 		exportEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		/*
 		 * FIXME:  Overriding endpoint URI with "anonymous", for now

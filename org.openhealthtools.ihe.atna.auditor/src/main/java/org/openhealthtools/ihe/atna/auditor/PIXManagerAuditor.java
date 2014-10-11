@@ -14,7 +14,10 @@ import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCod
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+
+import java.util.List;
 
 /**
  * Implementation of a PIX Auditor to send audit messages for
@@ -63,7 +66,7 @@ public class PIXManagerAuditor extends PIXAuditor
 			String sourceIpAddress, String sendingFacility, String sendingApp, 
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String hl7MessageControlId, 
-			String patientId) 
+			String patientId)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -74,7 +77,7 @@ public class PIXManagerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, getSystemAltUserId(), EventUtils.getAddressForUrl(pixManagerUri, false), 
 				null, 
 				hl7MessageControlId, 
-				new String[] {patientId});
+				new String[] {patientId}, null);
 	}
 
 	/**
@@ -95,7 +98,7 @@ public class PIXManagerAuditor extends PIXAuditor
 			String sendingApp, String pixManagerUri,
 			String receivingFacility, String receivingApp, 
 			String hl7MessageControlId,
-			String patientId) 
+			String patientId)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -106,7 +109,7 @@ public class PIXManagerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, getSystemAltUserId(), EventUtils.getAddressForUrl(pixManagerUri, false), 
 				null, 
 				hl7MessageControlId, 
-				new String[] {patientId});
+				new String[] {patientId}, null);
 	}
 	
 	/**
@@ -126,7 +129,7 @@ public class PIXManagerAuditor extends PIXAuditor
 			String sourceIpAddress, String sendingFacility, String sendingApp, 
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String hl7MessageControlId, 
-			String patientId) 
+			String patientId)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -137,7 +140,7 @@ public class PIXManagerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, getSystemAltUserId(), EventUtils.getAddressForUrl(pixManagerUri, false), 
 				null, 
 				hl7MessageControlId, 
-				new String[] {patientId});
+				new String[] {patientId}, null);
 	}
 
 	/**
@@ -159,7 +162,7 @@ public class PIXManagerAuditor extends PIXAuditor
 			String consumerIpAddress, String sendingFacility, String sendingApp,
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String hl7MessageControlId, String hl7QueryParameters, 
-			String[] patientIds) 
+			String[] patientIds)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -170,7 +173,7 @@ public class PIXManagerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, getSystemAltUserId(), EventUtils.getAddressForUrl(pixManagerUri, false), 
 				null, 
 				hl7MessageControlId, hl7QueryParameters, 
-				patientIds);
+				patientIds, null);
 	}
 	
 	/**
@@ -192,7 +195,7 @@ public class PIXManagerAuditor extends PIXAuditor
 			String consumerIpAddress, String sendingFacility, String sendingApp,
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String hl7MessageControlId, String hl7QueryParameters, 
-			String[] patientIds) 
+			String[] patientIds)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -203,7 +206,7 @@ public class PIXManagerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, getSystemAltUserId(), EventUtils.getAddressForUrl(pixManagerUri, false), 
 				null, 
 				hl7MessageControlId, hl7QueryParameters, 
-				patientIds);
+				patientIds, null);
 	}
 
 	/**
@@ -224,7 +227,7 @@ public class PIXManagerAuditor extends PIXAuditor
 			String consumerIpAddress, String sendingFacility, String sendingApp,
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String hl7MessageControlId, String hl7QueryParameters, 
-			String[] patientIds) 
+			String[] patientIds)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -235,7 +238,7 @@ public class PIXManagerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, getSystemAltUserId(), EventUtils.getAddressForUrl(pixManagerUri, false), 
 				null, 
 				hl7MessageControlId, hl7QueryParameters, 
-				patientIds);
+				patientIds, null);
 	}
 
 	/**
@@ -256,7 +259,7 @@ public class PIXManagerAuditor extends PIXAuditor
 			String pixMgrIpAddress, String sendingFacility, String sendingApp, 
 			String consumerEndpointUri, String receivingFacility, String receivingApp, 
 			String hl7MessageControlId,
-			String[] patientIds) 
+			String[] patientIds)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -268,6 +271,6 @@ public class PIXManagerAuditor extends PIXAuditor
 				receivingFacility, receivingApp, null, EventUtils.getAddressForUrl(consumerEndpointUri, false), 
 				null, 
 				hl7MessageControlId, 
-				patientIds);
+				patientIds, null);
 	}
 }

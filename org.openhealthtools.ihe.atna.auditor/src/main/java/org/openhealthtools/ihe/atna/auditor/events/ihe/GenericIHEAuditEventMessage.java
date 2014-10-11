@@ -56,9 +56,10 @@ public class GenericIHEAuditEventMessage extends GenericAuditEventMessageImpl
 			RFC3881EventOutcomeCodes outcome, 
 			RFC3881EventActionCodes action,
 			CodedValueType id, 
-			IHETransactionEventTypeCodes type)
+			IHETransactionEventTypeCodes type,
+            List<CodedValueType> purposesOfUse)
 	{
-		super(outcome,action,id,new IHETransactionEventTypeCodes[] {type});
+		super(outcome,action,id,new IHETransactionEventTypeCodes[] {type}, purposesOfUse);
 		this.systemIsSource = systemIsSource;	
 		this.eventType = type;
 	}

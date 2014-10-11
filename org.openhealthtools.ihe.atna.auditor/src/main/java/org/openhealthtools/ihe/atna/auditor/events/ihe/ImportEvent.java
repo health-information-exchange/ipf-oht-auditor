@@ -14,6 +14,9 @@ import org.openhealthtools.ihe.atna.auditor.codes.dicom.DICOMEventIdCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
+
+import java.util.List;
 
 /**
  * Audit Event representing a DICOM 95 Import event (DCM 110107)
@@ -31,13 +34,15 @@ public class ImportEvent extends GenericIHEAuditEventMessage
 	 * @param outcome Event outcome indicator
 	 * @param eventType The IHE Transaction for this event
 	 */
-	public ImportEvent(boolean systemIsSource, RFC3881EventOutcomeCodes outcome, IHETransactionEventTypeCodes eventType)
+	public ImportEvent(boolean systemIsSource, RFC3881EventOutcomeCodes outcome, IHETransactionEventTypeCodes eventType,
+                       List<CodedValueType> purposesOfUse)
 	{
 		super(  systemIsSource,
 				outcome, 
 				RFC3881EventCodes.RFC3881EventActionCodes.CREATE,
 				new DICOMEventIdCodes.Import(),
-				eventType
+				eventType,
+                purposesOfUse
 		);
 	}
 

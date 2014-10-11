@@ -13,6 +13,7 @@
 package org.openhealthtools.ihe.atna.auditor;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCodes;
@@ -67,14 +68,14 @@ public class XCPDInitiatingGatewayAuditor extends IHEAuditor
 	 */
 	public void auditXCPDQueryEvent(RFC3881EventOutcomeCodes eventOutcome, String sourceUserId,
 			String humanRequestorUserId, CodedValueType humanRequestorRoleIdCode,
-			String XCPDRGUri, String homeCommunityId, String queryByParameter
-			) 
+			String XCPDRGUri, String homeCommunityId, String queryByParameter,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
 		QueryEvent queryEvent = new QueryEvent(true, eventOutcome,
-				new IHETransactionEventTypeCodes.CrossGatewayPatientDiscovery());
+				new IHETransactionEventTypeCodes.CrossGatewayPatientDiscovery(), purposesOfUse);
 		
 		// Add the source active participant
 		queryEvent.addSourceActiveParticipant(sourceUserId, getSystemAltUserId(), getSystemUserName(), getSystemNetworkId(), true);

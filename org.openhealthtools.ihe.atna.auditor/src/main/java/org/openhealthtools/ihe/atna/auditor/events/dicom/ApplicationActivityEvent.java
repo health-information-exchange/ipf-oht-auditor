@@ -36,7 +36,8 @@ public class ApplicationActivityEvent extends GenericAuditEventMessageImpl
 		super(	outcome, 
 				RFC3881EventCodes.RFC3881EventActionCodes.EXECUTE,
 				new DICOMEventIdCodes.ApplicationActivity(),
-				new DICOMEventTypeCodes[] {type}
+				new DICOMEventTypeCodes[] {type},
+                null
 		);
 	}
 	

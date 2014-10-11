@@ -15,7 +15,10 @@ import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.ExportEvent;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.ImportEvent;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+
+import java.util.List;
 
 /**
  * Implementation of an IHE Auditor for the IHE XDM profile, including
@@ -50,13 +53,14 @@ public class XDMAuditor extends XDSAuditor
 	public void auditPortableMediaImport(
 			RFC3881EventOutcomeCodes eventOutcome,
 			String submissionSetUniqueId,
-			String patientId) 
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
 
-		ImportEvent importEvent = new ImportEvent(false, eventOutcome, new IHETransactionEventTypeCodes.DistributeDocumentSetOnMedia());
+		ImportEvent importEvent = new ImportEvent(false, eventOutcome, new IHETransactionEventTypeCodes.DistributeDocumentSetOnMedia(), purposesOfUse);
 		importEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		importEvent.addDestinationActiveParticipant(getSystemUserId(), getSystemAltUserId(), getSystemUserName(), getSystemNetworkId(), false);
 		if (!EventUtils.isEmptyOrNull(patientId)) {
@@ -77,12 +81,13 @@ public class XDMAuditor extends XDSAuditor
 	public void auditPortableMediaCreate(
 			RFC3881EventOutcomeCodes eventOutcome,
 			String submissionSetUniqueId,
-			String patientId) 
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
-		ExportEvent exportEvent = new ExportEvent(true, eventOutcome, new IHETransactionEventTypeCodes.DistributeDocumentSetOnMedia());
+		ExportEvent exportEvent = new ExportEvent(true, eventOutcome, new IHETransactionEventTypeCodes.DistributeDocumentSetOnMedia(), purposesOfUse);
 		exportEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		exportEvent.addSourceActiveParticipant(getSystemUserId(), getSystemAltUserId(), getSystemUserName(), getSystemNetworkId(), true);
 		if (!EventUtils.isEmptyOrNull(patientId)) {

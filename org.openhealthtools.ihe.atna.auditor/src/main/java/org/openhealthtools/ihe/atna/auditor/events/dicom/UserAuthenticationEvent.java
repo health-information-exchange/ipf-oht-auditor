@@ -36,7 +36,8 @@ public class UserAuthenticationEvent extends GenericAuditEventMessageImpl
 				outcome, 
 				RFC3881EventCodes.RFC3881EventActionCodes.EXECUTE,
 				new DICOMEventIdCodes.UserAuthentication(),
-				new DICOMEventTypeCodes[] {type}
+				new DICOMEventTypeCodes[] {type},
+                null
 		);
 	}
 	

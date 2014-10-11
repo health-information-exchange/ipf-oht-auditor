@@ -19,6 +19,7 @@ import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881ParticipantObjectCodes.RFC3881ParticipantObjectTypeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881ParticipantObjectCodes.RFC3881ParticipantObjectTypeRoleCodes;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.models.rfc3881.TypeValuePairType;
 
 /**
@@ -37,14 +38,16 @@ public class QueryEvent extends GenericIHEAuditEventMessage
 	 * @param outcome Event outcome indicator
 	 * @param eventType The IHE Transaction for this event
 	 */
-	public QueryEvent(boolean systemIsSource, RFC3881EventOutcomeCodes outcome, IHETransactionEventTypeCodes eventType)
+	public QueryEvent(boolean systemIsSource, RFC3881EventOutcomeCodes outcome, IHETransactionEventTypeCodes eventType,
+                      List<CodedValueType> purposesOfUse)
 	{
 		super(  
 				systemIsSource,
 				outcome, 
 				RFC3881EventCodes.RFC3881EventActionCodes.EXECUTE,
 				new DICOMEventIdCodes.Query(),
-				eventType
+				eventType,
+                purposesOfUse
 		);
 	}
 	

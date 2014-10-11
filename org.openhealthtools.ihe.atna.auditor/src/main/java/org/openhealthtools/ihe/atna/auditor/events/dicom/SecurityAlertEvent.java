@@ -44,7 +44,8 @@ public class SecurityAlertEvent extends GenericAuditEventMessageImpl
 				outcome, 
 				RFC3881EventCodes.RFC3881EventActionCodes.EXECUTE,
 				new DICOMEventIdCodes.SecurityAlert(),
-				new DICOMEventTypeCodes[] {eventType}
+				new DICOMEventTypeCodes[] {eventType},
+                null
 		);
 	}
 	

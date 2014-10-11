@@ -11,12 +11,14 @@
 package org.openhealthtools.ihe.atna.auditor;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.ExportEvent;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.ImportEvent;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
 
 /**
@@ -66,7 +68,7 @@ public class XDSRepositoryAuditor extends XDSAuditor
             String userName,
 			String repositoryEndpointUri,
 			String submissionSetUniqueId,
-			String patientId) 
+			String patientId)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -74,7 +76,7 @@ public class XDSRepositoryAuditor extends XDSAuditor
 		auditProvideAndRegisterEvent(new IHETransactionEventTypeCodes.ProvideAndRegisterDocumentSet(),
                 eventOutcome, sourceUserId, sourceIpAddress,
                 userName,
-                repositoryEndpointUri, submissionSetUniqueId, patientId);
+                repositoryEndpointUri, submissionSetUniqueId, patientId, null);
 	}
 	
 	/**
@@ -93,7 +95,8 @@ public class XDSRepositoryAuditor extends XDSAuditor
             String userName,
 			String repositoryEndpointUri,
 			String submissionSetUniqueId,
-			String patientId) 
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -101,7 +104,7 @@ public class XDSRepositoryAuditor extends XDSAuditor
 		auditProvideAndRegisterEvent( new IHETransactionEventTypeCodes.ProvideAndRegisterDocumentSetB(),
                 eventOutcome, sourceUserId, sourceIpAddress,
                 userName,
-                repositoryEndpointUri, submissionSetUniqueId, patientId);
+                repositoryEndpointUri, submissionSetUniqueId, patientId, purposesOfUse);
 	}
 
 	/**
@@ -117,14 +120,14 @@ public class XDSRepositoryAuditor extends XDSAuditor
 			String repositoryUserId,
             String userName,
 			String registryEndpointUri,
-			String submissionSetUniqueId, String patientId) 
+			String submissionSetUniqueId, String patientId)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
 		auditRegisterEvent(new IHETransactionEventTypeCodes.RegisterDocumentSet(), eventOutcome,
                 repositoryUserId, userName,
-                registryEndpointUri, submissionSetUniqueId, patientId);
+                registryEndpointUri, submissionSetUniqueId, patientId, null);
 	}
 
 	/**
@@ -140,14 +143,15 @@ public class XDSRepositoryAuditor extends XDSAuditor
 			String repositoryUserId,
             String userName,
 			String registryEndpointUri,
-			String submissionSetUniqueId, String patientId) 
+			String submissionSetUniqueId, String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
 		auditRegisterEvent(new IHETransactionEventTypeCodes.RegisterDocumentSetB(), eventOutcome, repositoryUserId,
                 userName,
-                registryEndpointUri, submissionSetUniqueId, patientId);
+                registryEndpointUri, submissionSetUniqueId, patientId, purposesOfUse);
 	}
 	
 	/**
@@ -167,7 +171,7 @@ public class XDSRepositoryAuditor extends XDSAuditor
 		if (!isAuditorEnabled()) {
 			return;
 		}
-		ExportEvent exportEvent = new ExportEvent(true, eventOutcome, new IHETransactionEventTypeCodes.RetrieveDocument());
+		ExportEvent exportEvent = new ExportEvent(true, eventOutcome, new IHETransactionEventTypeCodes.RetrieveDocument(), null);
 		exportEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		exportEvent.addSourceActiveParticipant(repositoryRetrieveUri, getSystemAltUserId(), null, EventUtils.getAddressForUrl(repositoryRetrieveUri, false), false);
         if (!EventUtils.isEmptyOrNull(userName)) {
@@ -196,7 +200,8 @@ public class XDSRepositoryAuditor extends XDSAuditor
 			RFC3881EventOutcomeCodes eventOutcome,
 			String consumerUserId, String consumerUserName, String consumerIpAddress,
 			String repositoryEndpointUri,
-			String[] documentUniqueIds, String repositoryUniqueId,  String homeCommunityId) 
+			String[] documentUniqueIds, String repositoryUniqueId,  String homeCommunityId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -209,7 +214,7 @@ public class XDSRepositoryAuditor extends XDSAuditor
 		}
 		
 		auditRetrieveDocumentSetEvent(eventOutcome, consumerUserId, consumerUserName, consumerIpAddress,
-                repositoryEndpointUri, documentUniqueIds, repositoryUniqueIds, homeCommunityId);
+                repositoryEndpointUri, documentUniqueIds, repositoryUniqueIds, homeCommunityId, purposesOfUse);
 	}
 	
 	/**
@@ -229,7 +234,8 @@ public class XDSRepositoryAuditor extends XDSAuditor
 			RFC3881EventOutcomeCodes eventOutcome,
 			String consumerUserId, String consumerUserName, String consumerIpAddress,
 			String repositoryEndpointUri,
-			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId) 
+			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -242,7 +248,7 @@ public class XDSRepositoryAuditor extends XDSAuditor
 		}
 		
 		auditRetrieveDocumentSetEvent(eventOutcome, consumerUserId, consumerUserName, consumerIpAddress,
-                repositoryEndpointUri, documentUniqueIds, repositoryUniqueIds, homeCommunityIds);
+                repositoryEndpointUri, documentUniqueIds, repositoryUniqueIds, homeCommunityIds, purposesOfUse);
 	}
 
 	/**
@@ -262,12 +268,13 @@ public class XDSRepositoryAuditor extends XDSAuditor
 			RFC3881EventOutcomeCodes eventOutcome,
 			String consumerUserId, String consumerUserName, String consumerIpAddress,
 			String repositoryEndpointUri,
-			String[] documentUniqueIds, String[] repositoryUniqueIds, String[] homeCommunityIds) 
+			String[] documentUniqueIds, String[] repositoryUniqueIds, String[] homeCommunityIds,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
-		ExportEvent exportEvent = new ExportEvent(true, eventOutcome, new IHETransactionEventTypeCodes.RetrieveDocumentSet());
+		ExportEvent exportEvent = new ExportEvent(true, eventOutcome, new IHETransactionEventTypeCodes.RetrieveDocumentSet(), purposesOfUse);
 		exportEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		exportEvent.addSourceActiveParticipant(repositoryEndpointUri, getSystemAltUserId(), null, EventUtils.getAddressForUrl(repositoryEndpointUri, false), false);
 		exportEvent.addDestinationActiveParticipant(consumerUserId, null, consumerUserName, consumerIpAddress, true);
@@ -303,9 +310,10 @@ public class XDSRepositoryAuditor extends XDSAuditor
             String userName,
 			String repositoryEndpointUri,
 			String submissionSetUniqueId,
-			String patientId)
+			String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
-		ImportEvent importEvent = new ImportEvent(false, eventOutcome, transaction);
+		ImportEvent importEvent = new ImportEvent(false, eventOutcome, transaction, purposesOfUse);
 		importEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		importEvent.addSourceActiveParticipant(sourceUserId, null, null, sourceIpAddress, true);
         if (!EventUtils.isEmptyOrNull(userName)) {
@@ -336,9 +344,10 @@ public class XDSRepositoryAuditor extends XDSAuditor
 			String repositoryUserId,
             String userName,
 			String registryEndpointUri,
-			String submissionSetUniqueId, String patientId)
+			String submissionSetUniqueId, String patientId,
+            List<CodedValueType> purposesOfUse)
 	{
-		ExportEvent exportEvent = new ExportEvent(true, eventOutcome, transaction);
+		ExportEvent exportEvent = new ExportEvent(true, eventOutcome, transaction, purposesOfUse);
 		exportEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		exportEvent.addSourceActiveParticipant(repositoryUserId, getSystemAltUserId(), null, getSystemNetworkId(), true);
         if (!EventUtils.isEmptyOrNull(userName)) {

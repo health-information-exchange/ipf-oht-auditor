@@ -238,7 +238,8 @@ public abstract class AbstractAuditEventMessageImpl implements AuditEventMessage
 	protected EventIdentificationType setEventIdentification(
 			RFC3881EventOutcomeCodes outcome, 
 			RFC3881EventActionCodes action,
-			CodedValueType id, CodedValueType[] type) {
+			CodedValueType id, CodedValueType[] type,
+            List<CodedValueType> purposesOfUse) {
 		EventIdentificationType eventBlock = new EventIdentificationType();
 	
 		eventBlock.setEventID(id);
@@ -252,6 +253,7 @@ public abstract class AbstractAuditEventMessageImpl implements AuditEventMessage
 		if (!EventUtils.isEmptyOrNull(type, true)) {
 			eventBlock.getEventTypeCode().addAll(Arrays.asList(type));
 		}
+        eventBlock.setPurposesOfUse(purposesOfUse);
 		
 		getAuditMessage().setEventIdentification(eventBlock);
 	

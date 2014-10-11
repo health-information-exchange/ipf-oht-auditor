@@ -20,6 +20,7 @@ import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881ParticipantObjectCodes.RFC3881ParticipantObjectTypeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881ParticipantObjectCodes.RFC3881ParticipantObjectTypeRoleCodes;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.models.rfc3881.TypeValuePairType;
 
 /**
@@ -42,14 +43,16 @@ public class PatientRecordEvent extends GenericIHEAuditEventMessage
 	public PatientRecordEvent(boolean systemIsSource, 
 			RFC3881EventOutcomeCodes outcome, 
 			RFC3881EventActionCodes eventActionCode, 
-			IHETransactionEventTypeCodes eventType)
+			IHETransactionEventTypeCodes eventType,
+            List<CodedValueType> purposesOfUse)
 	{
 		super(  
 				systemIsSource,
 				outcome, 
 				eventActionCode,
 				new DICOMEventIdCodes.PatientRecord(),
-				eventType
+				eventType,
+                purposesOfUse
 		);
 	}
 

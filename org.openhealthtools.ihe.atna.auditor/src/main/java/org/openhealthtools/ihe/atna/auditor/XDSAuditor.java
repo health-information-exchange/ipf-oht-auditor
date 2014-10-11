@@ -13,7 +13,10 @@ package org.openhealthtools.ihe.atna.auditor;
 import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.QueryEvent;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+
+import java.util.List;
 
 /**
  * Abstract implementation of an IHE Cross-Enterprise Document Sharing auditor.  
@@ -57,9 +60,10 @@ public abstract class XDSAuditor extends IHEAuditor
             boolean humanAfterDestination,
 			String registryEndpointUri, String registryAltUserId, // Destination Participant
 			String storedQueryUUID, String adhocQueryRequestPayload, String homeCommunityId,  // Payload Object Participant
-			String patientId)  // Patient Object Participant
+			String patientId,
+            List<CodedValueType> purposesOfUse)  // Patient Object Participant
 	{
-		QueryEvent queryEvent = new QueryEvent(systemIsSource, eventOutcome, transaction);
+		QueryEvent queryEvent = new QueryEvent(systemIsSource, eventOutcome, transaction, purposesOfUse);
 		queryEvent.setAuditSourceId(auditSourceId, auditSourceEnterpriseSiteId);
 		queryEvent.addSourceActiveParticipant(sourceUserId, sourceAltUserId, sourceUserName, sourceNetworkId, true);
 

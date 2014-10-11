@@ -14,7 +14,10 @@ import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCod
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.ImportEvent;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+
+import java.util.List;
 
 /**
  * Implementation of a XDS Auditor to send audit messages for
@@ -60,7 +63,7 @@ public class XCAInitiatingGatewayAuditor extends XDSAuditor
 			String respondingGatewayEndpointUri, 
 			String initiatingGatewayUserId, String initiatingGatewayUserName, 
 			String storedQueryUUID, String adhocQueryRequestPayload, String homeCommunityId,
-			String patientId) 
+			String patientId, List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -73,7 +76,7 @@ public class XCAInitiatingGatewayAuditor extends XDSAuditor
 				initiatingGatewayUserName, initiatingGatewayUserName, false,
 				respondingGatewayEndpointUri, null,
 				storedQueryUUID, adhocQueryRequestPayload, homeCommunityId, 
-				patientId);
+				patientId, purposesOfUse);
 	}
 
 	/**
@@ -88,12 +91,13 @@ public class XCAInitiatingGatewayAuditor extends XDSAuditor
 	public void auditCrossGatewayRetrieveEvent(RFC3881EventOutcomeCodes eventOutcome, 
 			String respondingGatewayEndpointUri,
 			String initiatingGatewayUserId, String initiatingGatewayUserName,
-			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId) 
+			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
-		ImportEvent importEvent = new ImportEvent(false, eventOutcome, new IHETransactionEventTypeCodes.CrossGatewayRetrieve());
+		ImportEvent importEvent = new ImportEvent(false, eventOutcome, new IHETransactionEventTypeCodes.CrossGatewayRetrieve(), purposesOfUse);
 		importEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		importEvent.addSourceActiveParticipant(respondingGatewayEndpointUri, null, null, EventUtils.getAddressForUrl(respondingGatewayEndpointUri, false), false);
 		importEvent.addDestinationActiveParticipant(initiatingGatewayUserId, getSystemAltUserId(), initiatingGatewayUserName, getSystemNetworkId(), true);
@@ -128,14 +132,15 @@ public class XCAInitiatingGatewayAuditor extends XDSAuditor
 			RFC3881EventOutcomeCodes eventOutcome,
 			String consumerUserId, String consumerUserName, String consumerIpAddress,
 			String repositoryEndpointUri,
-			String[] documentUniqueIds, String[] repositoryUniqueIds, String[] homeCommunityIds) 
+			String[] documentUniqueIds, String[] repositoryUniqueIds, String[] homeCommunityIds,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
 		XDSRepositoryAuditor.getAuditor().auditRetrieveDocumentSetEvent(eventOutcome, consumerUserId,
                 consumerUserName, consumerIpAddress, repositoryEndpointUri,
-                documentUniqueIds, repositoryUniqueIds, homeCommunityIds);
+                documentUniqueIds, repositoryUniqueIds, homeCommunityIds, purposesOfUse);
 	}
 
 	/**
@@ -156,12 +161,12 @@ public class XCAInitiatingGatewayAuditor extends XDSAuditor
 			String consumerUserId, String consumerUserName, String consumerIpAddress,
 			String registryEndpointUri, 
 			String storedQueryUUID, String adhocQueryRequestPayload, String homeCommunityId,
-			String patientId) 
+			String patientId, List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
-		XDSRegistryAuditor.getAuditor().auditRegistryStoredQueryEvent(eventOutcome, consumerUserId, consumerUserName, consumerIpAddress, registryEndpointUri, storedQueryUUID, adhocQueryRequestPayload, homeCommunityId, patientId);
+		XDSRegistryAuditor.getAuditor().auditRegistryStoredQueryEvent(eventOutcome, consumerUserId, consumerUserName, consumerIpAddress, registryEndpointUri, storedQueryUUID, adhocQueryRequestPayload, homeCommunityId, patientId, purposesOfUse);
 	}
 	
 }

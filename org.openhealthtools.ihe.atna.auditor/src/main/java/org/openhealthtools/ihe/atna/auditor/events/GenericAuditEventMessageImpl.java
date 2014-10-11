@@ -15,6 +15,8 @@ import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 
+import java.util.List;
+
 /**
  * Generic audit message that creates a valid audit event message 
  * (e.g. one that contains an Event Identification block) as well as 
@@ -30,9 +32,10 @@ public class GenericAuditEventMessageImpl extends AbstractAuditEventMessageImpl
 
 	public GenericAuditEventMessageImpl( RFC3881EventOutcomeCodes outcome, 
 			RFC3881EventActionCodes action,
-			CodedValueType id, CodedValueType[] type)
+			CodedValueType id, CodedValueType[] type,
+            List<CodedValueType> purposesOfUse)
 	{
-		setEventIdentification(outcome,action,id,type);
+		setEventIdentification(outcome,action,id,type, purposesOfUse);
 	}
 	
 	/**

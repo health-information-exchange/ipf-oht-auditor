@@ -87,6 +87,7 @@ public class EventIdentificationType {
     protected String eventDateTime;
     //@XmlAttribute(name = "EventOutcomeIndicator", required = true)
     protected Integer eventOutcomeIndicator;
+    protected List<CodedValueType> purposesOfUse;
 
 	public String toString(boolean useSpacing)
 	{
@@ -123,7 +124,13 @@ public class EventIdentificationType {
     			sb.append(i.next().toString("EventTypeCode"));
     		}
     	}
-    	
+
+        if (purposesOfUse != null) {
+            for (CodedValueType cvp : purposesOfUse) {
+                sb.append(cvp.toString("PurposeOfUse"));
+            }
+        }
+
     	if (useSpacing) {
     		sb.append("\n");
     	}
@@ -263,4 +270,12 @@ public class EventIdentificationType {
         this.eventOutcomeIndicator = value;
     }
 
+
+    public List<CodedValueType> getPurposesOfUse() {
+        return purposesOfUse;
+    }
+
+    public void setPurposesOfUse(List<CodedValueType> purposesOfUse) {
+        this.purposesOfUse = purposesOfUse;
+    }
 }

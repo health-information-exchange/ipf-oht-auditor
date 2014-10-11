@@ -15,7 +15,10 @@ import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.PatientRecordEvent;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.QueryEvent;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+
+import java.util.List;
 
 /**
  * Abstract implementation of an IHE PIX/PDQ auditor.  Constructs audit messages that
@@ -53,10 +56,11 @@ public abstract class PIXAuditor extends IHEAuditor
 			String destinationFacility,	String destinationApp, String destinationAltUserId, String destinationNetworkId,
 			String humanRequestor,
 			String hl7MessageId, String hl7QueryParameters, 
-			String[] patientIds) 
+			String[] patientIds,
+            List<CodedValueType> purposesOfUse)
 	{
 		// Create query event
-		QueryEvent queryEvent = new QueryEvent(systemIsSource, eventOutcome, transaction);
+		QueryEvent queryEvent = new QueryEvent(systemIsSource, eventOutcome, transaction, purposesOfUse);
 		queryEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		// Set the source active participant
 		queryEvent.addSourceActiveParticipant(EventUtils.concatHL7FacilityApplication(sourceFacility,sourceApp), sourceAltUserId, null, sourceNetworkId, true);
@@ -114,10 +118,11 @@ public abstract class PIXAuditor extends IHEAuditor
 			String destinationFacility,	String destinationApp, String destinationAltUserId, String destinationNetworkId,
 			String humanRequestor,
 			String hl7MessageId, 
-			String patientIds[])
+			String patientIds[],
+            List<CodedValueType> purposesOfUse)
 	{
 		// Create Patient Record event
-		PatientRecordEvent patientEvent = new PatientRecordEvent(systemIsSource, eventOutcome, eventActionCode, transaction);
+		PatientRecordEvent patientEvent = new PatientRecordEvent(systemIsSource, eventOutcome, eventActionCode, transaction, purposesOfUse);
 		patientEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		// Set the source active participant
 		patientEvent.addSourceActiveParticipant(EventUtils.concatHL7FacilityApplication(sourceFacility,sourceApp), sourceAltUserId, null, sourceNetworkId, true);

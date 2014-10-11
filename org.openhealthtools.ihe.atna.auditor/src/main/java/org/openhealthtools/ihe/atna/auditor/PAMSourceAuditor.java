@@ -59,7 +59,7 @@ public class PAMSourceAuditor extends PIXAuditor
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String sendingFacility, String sendingApp, 
 			String hl7MessageControlId, 
-			String patientId) 
+			String patientId)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -70,7 +70,7 @@ public class PAMSourceAuditor extends PIXAuditor
 				receivingFacility, receivingApp, null, EventUtils.getAddressForUrl(pixManagerUri, false), 
 				getHumanRequestor(), 
 				hl7MessageControlId, 
-				new String[] {patientId});		
+				new String[] {patientId}, null);
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class PAMSourceAuditor extends PIXAuditor
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String sendingFacility, String sendingApp, 
 			String hl7MessageControlId, 
-			String patientId) 
+			String patientId)
 	{	
 		if (!isAuditorEnabled()) {
 			return;
@@ -101,7 +101,7 @@ public class PAMSourceAuditor extends PIXAuditor
 				receivingFacility, receivingApp, null, EventUtils.getAddressForUrl(pixManagerUri, false), 
 				getHumanRequestor(), 
 				hl7MessageControlId, 
-				new String[] {patientId});			
+				new String[] {patientId}, null);
 	}
 	
 	/**
@@ -121,7 +121,7 @@ public class PAMSourceAuditor extends PIXAuditor
 			String pixManagerUri, String receivingFacility, String receivingApp, 
 			String sendingFacility, String sendingApp, 
 			String hl7MessageControlId, 
-			String patientId) 
+			String patientId)
 	{
 		if (!isAuditorEnabled()) {
 			return;
@@ -132,6 +132,6 @@ public class PAMSourceAuditor extends PIXAuditor
 				receivingFacility, receivingApp, null, EventUtils.getAddressForUrl(pixManagerUri, false), 
 				getHumanRequestor(), 
 				hl7MessageControlId, 
-				new String[] {patientId});			
+				new String[] {patientId}, null);
 	}
 }

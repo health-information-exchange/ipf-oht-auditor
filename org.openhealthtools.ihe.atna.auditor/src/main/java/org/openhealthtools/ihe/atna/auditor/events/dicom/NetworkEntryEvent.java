@@ -35,7 +35,8 @@ public class NetworkEntryEvent extends GenericAuditEventMessageImpl
 				outcome, 
 				RFC3881EventCodes.RFC3881EventActionCodes.EXECUTE,
 				new DICOMEventIdCodes.NetworkEntry(),
-				new DICOMEventTypeCodes[] {type}
+				new DICOMEventTypeCodes[] {type},
+                null
 		);
 	}
 	

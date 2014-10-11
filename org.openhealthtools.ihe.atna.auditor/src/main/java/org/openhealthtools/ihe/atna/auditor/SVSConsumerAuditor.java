@@ -14,7 +14,10 @@ import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCod
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.ImportEvent;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+
+import java.util.List;
 
 /**
  * Implementation of a SVS Consumer Auditor to send audit messages for
@@ -54,12 +57,13 @@ public class SVSConsumerAuditor extends IHEAuditor
 	public void auditRetrieveValueSetEvent(RFC3881EventOutcomeCodes eventOutcome, 
 			String repositoryEndpointUri, 
 			String valueSetUniqueId, String valueSetName, 
-			String valueSetVersion) 
+			String valueSetVersion,
+            List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
 			return;
 		}
-		ImportEvent importEvent = new ImportEvent(false, eventOutcome, new IHETransactionEventTypeCodes.RetrieveValueSet());
+		ImportEvent importEvent = new ImportEvent(false, eventOutcome, new IHETransactionEventTypeCodes.RetrieveValueSet(), purposesOfUse);
 		importEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		importEvent.addSourceActiveParticipant(EventUtils.getAddressForUrl(repositoryEndpointUri, false), null, null, EventUtils.getAddressForUrl(repositoryEndpointUri, false), false);
 		importEvent.addDestinationActiveParticipant(getSystemUserId(), getSystemAltUserId(), getSystemUserName(), getSystemNetworkId(), true);

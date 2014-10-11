@@ -36,7 +36,7 @@ public class AuditLogUsedEvent extends GenericAuditEventMessageImpl
 				outcome, 
 				RFC3881EventCodes.RFC3881EventActionCodes.READ,
 				new DICOMEventIdCodes.AuditLogUsed(),
-				null
+				null, null
 		);
 	}
 	
