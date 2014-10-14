@@ -71,9 +71,7 @@ public abstract class XDSAuditor extends IHEAuditor
             queryEvent.addDestinationActiveParticipant(registryEndpointUri, registryAltUserId, null, EventUtils.getAddressForUrl(registryEndpointUri, false), false);
         }
 
-        if (!EventUtils.isEmptyOrNull(humanRequestor)) {
-			queryEvent.addHumanRequestorActiveParticipant(humanRequestor, null, humanRequestorName, null);
-		} else if(!EventUtils.isEmptyOrNull(humanRequestorName)) {
+        if(!EventUtils.isEmptyOrNull(humanRequestorName)) {
             queryEvent.addHumanRequestorActiveParticipant(humanRequestorName, null, humanRequestorName, null);
         }
 

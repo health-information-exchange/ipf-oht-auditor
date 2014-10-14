@@ -173,42 +173,12 @@ public class XDSConsumerAuditor extends XDSAuditor
 		}
 		
 		String[] repositoryUniqueIds = null;
+        String[] homeCommunityIds = null;
 		if (!EventUtils.isEmptyOrNull(documentUniqueIds)) {
-			repositoryUniqueIds = new String[documentUniqueIds.length];
-			Arrays.fill(repositoryUniqueIds, repositoryUniqueId);
-		}
-		
-		auditRetrieveDocumentSetEvent(eventOutcome, repositoryEndpointUri,
-                userName,
-                documentUniqueIds, repositoryUniqueIds, homeCommunityId, patientId, purposesOfUse);
-	}
-	
-	/**
-	 * Audits an ITI-43 Retrieve Document Set event for XDS.b Document Consumer actors.
-	 * Sends audit messages for situations when more than one repository and zero or one community are specified in the transaction.
-	 * 
-	 * @param eventOutcome The event outcome indicator
-	 * @param repositoryEndpointUri The Web service endpoint URI for the document repository
-	 * @param documentUniqueIds The list of Document Entry UniqueId(s) for the document(s) retrieved
-	 * @param repositoryUniqueIds The list of XDS.b Repository Unique Ids involved in this transaction (aligned with Document Unique Ids array)
-	 * @param homeCommunityId The XCA Home Community Id used in the transaction
-	 * @param patientId The patient ID the document(s) relate to (if known)
-	 */
-	public void auditRetrieveDocumentSetEvent(RFC3881EventOutcomeCodes eventOutcome, 
-			String repositoryEndpointUri,
-            String userName,
-			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId, 
-			String patientId,
-            List<CodedValueType> purposesOfUse)
-	{
-		if (!isAuditorEnabled()) {
-			return;
-		}
-		
-		String[] homeCommunityIds = null;
-		if (!EventUtils.isEmptyOrNull(documentUniqueIds)) {
-			homeCommunityIds = new String[documentUniqueIds.length];
-			Arrays.fill(homeCommunityIds, homeCommunityId);
+            repositoryUniqueIds = new String[documentUniqueIds.length];
+            Arrays.fill(repositoryUniqueIds, repositoryUniqueId);
+            homeCommunityIds = new String[documentUniqueIds.length];
+            Arrays.fill(homeCommunityIds, homeCommunityId);
 		}
 		
 		auditRetrieveDocumentSetEvent(eventOutcome, repositoryEndpointUri,
@@ -216,6 +186,7 @@ public class XDSConsumerAuditor extends XDSAuditor
                 documentUniqueIds, repositoryUniqueIds, homeCommunityIds, patientId, purposesOfUse);
 	}
 	
+
 	/**
 	 * Audits an ITI-43 Retrieve Document Set event for XDS.b Document Consumer actors.
 	 * Sends audit messages for situations when more than one repository and more than one community are specified in the transaction.

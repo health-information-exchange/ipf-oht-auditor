@@ -93,14 +93,14 @@ public class XCARespondingGatewayAuditor extends XDSAuditor
 	 * @param respondingGatewayEndpointUri The Web service endpoint URI for this document repository
 	 * @param documentUniqueIds The list of Document Entry UniqueId(s) for the document(s) retrieved
 	 * @param repositoryUniqueIds The list of XDS.b Repository Unique Ids involved in this transaction (aligned with Document Unique Ids array)
-	 * @param homeCommunityId The home community id used in the transaction
+	 * @param homeCommunityIds The list of home community ids used in the transaction
 	 */
 	public void auditCrossGatewayRetrieveEvent(
 			RFC3881EventOutcomeCodes eventOutcome,
 			String initiatingGatewayUserId, String initiatingGatewayIpAddress,
 			String respondingGatewayEndpointUri,
             String initiatingGatewayUserName,
-			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId,
+			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityIds[],
             List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
@@ -110,9 +110,7 @@ public class XCARespondingGatewayAuditor extends XDSAuditor
 		exportEvent.setAuditSourceId(getAuditSourceId(), getAuditEnterpriseSiteId());
 		exportEvent.addSourceActiveParticipant(respondingGatewayEndpointUri, getSystemAltUserId(), null, EventUtils.getAddressForUrl(respondingGatewayEndpointUri, false), false);
 
-        if (!EventUtils.isEmptyOrNull(initiatingGatewayUserId)) {
-			exportEvent.addHumanRequestorActiveParticipant(initiatingGatewayUserId, null, initiatingGatewayUserName, null);
-		} else if(!EventUtils.isEmptyOrNull(initiatingGatewayUserName)) {
+		if(!EventUtils.isEmptyOrNull(initiatingGatewayUserName)) {
             exportEvent.addHumanRequestorActiveParticipant(initiatingGatewayUserName, null, initiatingGatewayUserName, null);
         }
 
@@ -120,7 +118,7 @@ public class XCARespondingGatewayAuditor extends XDSAuditor
 		//exportEvent.addPatientParticipantObject(patientId);
 		if (!EventUtils.isEmptyOrNull(documentUniqueIds)) {
 			for (int i=0; i<documentUniqueIds.length; i++) {
-				exportEvent.addDocumentParticipantObject(documentUniqueIds[i], repositoryUniqueIds[i], homeCommunityId);
+				exportEvent.addDocumentParticipantObject(documentUniqueIds[i], repositoryUniqueIds[i], homeCommunityIds[i]);
 			}
 		}
 		audit(exportEvent);
@@ -133,12 +131,12 @@ public class XCARespondingGatewayAuditor extends XDSAuditor
 	 * @param repositoryEndpointUri The Web service endpoint URI for the document repository
 	 * @param repositoryUniqueIds The XDS.b RepositoryUniqueId value for the repository
 	 * @param documentUniqueIds The list of Document Entry UniqueId(s) for the document(s) retrieved
-	 * @param homeCommunityId The home community id used in the transaction
+	 * @param homeCommunityIds The list of home community ids used in the transaction
 	 */	
 	public void auditRetrieveDocumentSetEvent(RFC3881EventOutcomeCodes eventOutcome, 
 			String repositoryEndpointUri,
             String userName,
-			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId,
+			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityIds[],
             List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
@@ -146,7 +144,7 @@ public class XCARespondingGatewayAuditor extends XDSAuditor
 		}
 		XDSConsumerAuditor.getAuditor().auditRetrieveDocumentSetEvent(eventOutcome, repositoryEndpointUri,
                 userName,
-                documentUniqueIds,  repositoryUniqueIds, homeCommunityId, null, purposesOfUse);
+                documentUniqueIds,  repositoryUniqueIds, homeCommunityIds, null, purposesOfUse);
 	}
 	
 	/**

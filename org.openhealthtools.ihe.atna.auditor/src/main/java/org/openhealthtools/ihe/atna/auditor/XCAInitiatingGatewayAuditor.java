@@ -86,12 +86,12 @@ public class XCAInitiatingGatewayAuditor extends XDSAuditor
 	 * @param respondingGatewayEndpointUri The Web service endpoint URI for the document repository
 	 * @param documentUniqueIds The list of Document Entry UniqueId(s) for the document(s) retrieved
 	 * @param repositoryUniqueIds The list of XDS.b Repository Unique Ids involved in this transaction (aligned with Document Unique Ids array)
-	 * @param homeCommunityId The home community id used in the transaction
+	 * @param homeCommunityIds The list of home community ids used in the transaction
 	 */	
 	public void auditCrossGatewayRetrieveEvent(RFC3881EventOutcomeCodes eventOutcome, 
 			String respondingGatewayEndpointUri,
 			String initiatingGatewayUserId, String initiatingGatewayUserName,
-			String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId,
+			String[] documentUniqueIds, String[] repositoryUniqueIds, String[] homeCommunityIds,
             List<CodedValueType> purposesOfUse)
 	{
 		if (!isAuditorEnabled()) {
@@ -102,15 +102,13 @@ public class XCAInitiatingGatewayAuditor extends XDSAuditor
 		importEvent.addSourceActiveParticipant(respondingGatewayEndpointUri, null, null, EventUtils.getAddressForUrl(respondingGatewayEndpointUri, false), false);
 		importEvent.addDestinationActiveParticipant(initiatingGatewayUserId, getSystemAltUserId(), initiatingGatewayUserName, getSystemNetworkId(), true);
 
-        if (!EventUtils.isEmptyOrNull(initiatingGatewayUserId)) {
-			importEvent.addHumanRequestorActiveParticipant(initiatingGatewayUserId, null, initiatingGatewayUserName, null);
-		} else if(!EventUtils.isEmptyOrNull(initiatingGatewayUserName)) {
+		if(!EventUtils.isEmptyOrNull(initiatingGatewayUserName)) {
             importEvent.addHumanRequestorActiveParticipant(initiatingGatewayUserName, null, initiatingGatewayUserName, null);
         }
 
 		if (!EventUtils.isEmptyOrNull(documentUniqueIds)) {
 			for (int i=0; i<documentUniqueIds.length; i++) {
-				importEvent.addDocumentParticipantObject(documentUniqueIds[i], repositoryUniqueIds[i], homeCommunityId);
+				importEvent.addDocumentParticipantObject(documentUniqueIds[i], repositoryUniqueIds[i], homeCommunityIds[i]);
 			}
 		}
 		audit(importEvent);
