@@ -107,6 +107,19 @@ public class XDSRepositoryAuditor extends XDSAuditor
                 repositoryEndpointUri, submissionSetUniqueId, patientId, purposesOfUse);
 	}
 
+    @Deprecated
+    public void auditProvideAndRegisterDocumentSetBEvent(
+            RFC3881EventOutcomeCodes eventOutcome,
+            String sourceUserId, String sourceIpAddress,
+            String userName,
+            String repositoryEndpointUri,
+            String submissionSetUniqueId,
+            String patientId)
+    {
+        auditProvideAndRegisterDocumentSetBEvent(eventOutcome, sourceUserId, sourceIpAddress,
+                userName, repositoryEndpointUri, submissionSetUniqueId, patientId, null);
+    }
+
 	/**
 	 * Audits an ITI-14 Register Document Set event for XDS.a Document Repository actors.
 	 * 
@@ -153,7 +166,19 @@ public class XDSRepositoryAuditor extends XDSAuditor
                 userName,
                 registryEndpointUri, submissionSetUniqueId, patientId, purposesOfUse);
 	}
-	
+
+    @Deprecated
+    public void auditRegisterDocumentSetBEvent(
+            RFC3881EventOutcomeCodes eventOutcome,
+            String repositoryUserId,
+            String userName,
+            String registryEndpointUri,
+            String submissionSetUniqueId, String patientId)
+    {
+        auditRegisterDocumentSetBEvent(eventOutcome, repositoryUserId, userName, registryEndpointUri,
+                submissionSetUniqueId, patientId, null);
+    }
+
 	/**
 	 * Audits an ITI-17 Retrieve Document event for XDS.a Document Repository actors.
 	 * 
@@ -216,8 +241,19 @@ public class XDSRepositoryAuditor extends XDSAuditor
 		auditRetrieveDocumentSetEvent(eventOutcome, consumerUserId, consumerUserName, consumerIpAddress,
                 repositoryEndpointUri, documentUniqueIds, repositoryUniqueIds, homeCommunityId, purposesOfUse);
 	}
-	
-	/**
+
+    @Deprecated
+    public void auditRetrieveDocumentSetEvent(
+            RFC3881EventOutcomeCodes eventOutcome,
+            String consumerUserId, String consumerUserName, String consumerIpAddress,
+            String repositoryEndpointUri,
+            String[] documentUniqueIds, String repositoryUniqueId,  String homeCommunityId)
+    {
+        auditRetrieveDocumentSetEvent(eventOutcome, consumerUserId, consumerUserName, consumerIpAddress,
+                repositoryEndpointUri, documentUniqueIds, repositoryUniqueId, homeCommunityId, null);
+    }
+
+    /**
 	 * Audits an ITI-43 Retrieve Document Set-b event for XDS.b Document Repository actors.
 	 * Sends audit messages for situations when more than one repository and zero or one community are specified in the transaction.
 	 * 
@@ -250,6 +286,17 @@ public class XDSRepositoryAuditor extends XDSAuditor
 		auditRetrieveDocumentSetEvent(eventOutcome, consumerUserId, consumerUserName, consumerIpAddress,
                 repositoryEndpointUri, documentUniqueIds, repositoryUniqueIds, homeCommunityIds, purposesOfUse);
 	}
+
+    @Deprecated
+    public void auditRetrieveDocumentSetEvent(
+            RFC3881EventOutcomeCodes eventOutcome,
+            String consumerUserId, String consumerUserName, String consumerIpAddress,
+            String repositoryEndpointUri,
+            String[] documentUniqueIds, String[] repositoryUniqueIds, String homeCommunityId)
+    {
+        auditRetrieveDocumentSetEvent(eventOutcome, consumerUserId, consumerUserName, consumerIpAddress,
+                repositoryEndpointUri, documentUniqueIds, repositoryUniqueIds, homeCommunityId, null);
+    }
 
 	/**
 	 * Audits an ITI-43 Retrieve Document Set-b event for XDS.b Document Repository actors.
@@ -291,8 +338,18 @@ public class XDSRepositoryAuditor extends XDSAuditor
 		audit(exportEvent);
 	}
 
-	
-	/**
+    @Deprecated
+    public void auditRetrieveDocumentSetEvent(
+            RFC3881EventOutcomeCodes eventOutcome,
+            String consumerUserId, String consumerUserName, String consumerIpAddress,
+            String repositoryEndpointUri,
+            String[] documentUniqueIds, String[] repositoryUniqueIds, String[] homeCommunityIds)
+    {
+        auditRetrieveDocumentSetEvent(eventOutcome, consumerUserId, consumerUserName, consumerIpAddress,
+                repositoryEndpointUri, documentUniqueIds, repositoryUniqueIds, homeCommunityIds, null);
+    }
+
+    /**
 	 * Generically sends audit messages for XDS Document Repository Provide And Register Document Set events
 	 * 
 	 * @param transaction The specific IHE Transaction (ITI-15 or ITI-41)
@@ -327,7 +384,21 @@ public class XDSRepositoryAuditor extends XDSAuditor
 		
 		audit(importEvent);
 	}
-	
+
+    @Deprecated
+    protected void auditProvideAndRegisterEvent (
+            IHETransactionEventTypeCodes transaction,
+            RFC3881EventOutcomeCodes eventOutcome,
+            String sourceUserId, String sourceIpAddress,
+            String userName,
+            String repositoryEndpointUri,
+            String submissionSetUniqueId,
+            String patientId)
+    {
+        auditProvideAndRegisterEvent(transaction, eventOutcome, sourceUserId, sourceIpAddress, userName,
+                repositoryEndpointUri, submissionSetUniqueId, patientId, null);
+    }
+
 	/**
 	 * Generically sends audit messages for XDS Document Repository Register Document Set events
 	 * 
@@ -360,5 +431,18 @@ public class XDSRepositoryAuditor extends XDSAuditor
 		exportEvent.addSubmissionSetParticipantObject(submissionSetUniqueId);
 		audit(exportEvent);
 	}
-	
+
+    @Deprecated
+    protected void auditRegisterEvent (
+            IHETransactionEventTypeCodes transaction,
+            RFC3881EventOutcomeCodes eventOutcome,
+            String repositoryUserId,
+            String userName,
+            String registryEndpointUri,
+            String submissionSetUniqueId, String patientId)
+    {
+        auditRegisterEvent(transaction, eventOutcome, repositoryUserId, userName, registryEndpointUri,
+                submissionSetUniqueId, patientId, null);
+    }
+
 }

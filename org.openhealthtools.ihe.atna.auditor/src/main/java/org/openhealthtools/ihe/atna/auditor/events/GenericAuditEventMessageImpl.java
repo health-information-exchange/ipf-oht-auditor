@@ -30,15 +30,24 @@ import java.util.List;
 public class GenericAuditEventMessageImpl extends AbstractAuditEventMessageImpl
 {
 
-	public GenericAuditEventMessageImpl( RFC3881EventOutcomeCodes outcome, 
-			RFC3881EventActionCodes action,
-			CodedValueType id, CodedValueType[] type,
-            List<CodedValueType> purposesOfUse)
-	{
-		setEventIdentification(outcome,action,id,type, purposesOfUse);
-	}
-	
-	/**
+    public GenericAuditEventMessageImpl( RFC3881EventOutcomeCodes outcome,
+                                         RFC3881EventActionCodes action,
+                                         CodedValueType id, CodedValueType[] type,
+                                         List<CodedValueType> purposesOfUse)
+    {
+        setEventIdentification(outcome,action,id,type, purposesOfUse);
+    }
+
+    @Deprecated
+    public GenericAuditEventMessageImpl( RFC3881EventOutcomeCodes outcome,
+                                         RFC3881EventActionCodes action,
+                                         CodedValueType id, CodedValueType[] type)
+    {
+        this(outcome, action, id, type, null);
+    }
+
+
+    /**
 	 * Sets a Audit Source Identification block for a given Audit Source ID
 	 * @param sourceId The Audit Source ID to use
 	 */

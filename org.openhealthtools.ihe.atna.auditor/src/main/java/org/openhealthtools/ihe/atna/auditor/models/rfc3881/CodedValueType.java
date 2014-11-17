@@ -187,4 +187,27 @@ public class CodedValueType {
         this.codeSystemName = value;
     }
 
+
+    /**
+     * Gets the value of the displayName property.
+     *
+     * @return possible object is {@link String}
+     * @deprecated use getOriginalText instead
+     */
+    @Deprecated
+    public String getDisplayName() {
+        return originalText;
+    }
+
+    /**
+     * Sets the value of the displayName property.
+     *
+     * @param value allowed object is {@link String}
+     * @deprecated use setOriginalText instead
+     */
+    @Deprecated
+    public void setDisplayName(String value) {
+        this.originalText = value;
+    }
+
 }

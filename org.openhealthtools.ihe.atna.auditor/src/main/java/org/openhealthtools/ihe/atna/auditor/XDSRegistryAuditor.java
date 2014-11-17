@@ -139,6 +139,19 @@ public class XDSRegistryAuditor extends XDSAuditor
 				patientId, purposesOfUse);
 	}
 
+    @Deprecated
+    public void auditRegistryStoredQueryEvent(
+            RFC3881EventOutcomeCodes eventOutcome,
+            String consumerUserId, String consumerUserName, String consumerIpAddress,
+            String registryEndpointUri,
+            String storedQueryUUID, String adhocQueryRequestPayload, String homeCommunityId,
+            String patientId)
+    {
+        auditRegistryStoredQueryEvent(eventOutcome, consumerUserId, consumerUserName,
+                consumerIpAddress, registryEndpointUri, storedQueryUUID, adhocQueryRequestPayload,
+                homeCommunityId, patientId, null);
+    }
+
 	/**
 	 * Audits an ITI-42 Register Document Set-b event for XDS.b Document Registry actors.
 	 * 
@@ -166,7 +179,20 @@ public class XDSRegistryAuditor extends XDSAuditor
                 userName,
                 registryEndpointUri, submissionSetUniqueId, patientId, purposesOfUse);
 	}
-	
+
+    @Deprecated
+    public void auditRegisterDocumentSetBEvent(
+            RFC3881EventOutcomeCodes eventOutcome,
+            String repositoryUserId, String repositoryIpAddress,
+            String userName,
+            String registryEndpointUri,
+            String submissionSetUniqueId,
+            String patientId)
+    {
+        auditRegisterDocumentSetBEvent(eventOutcome, repositoryUserId, repositoryIpAddress,
+                userName, registryEndpointUri, submissionSetUniqueId, patientId, null);
+    }
+
 	/**
 	 * Generically sends audit messages for XDS Document Registry Register Document Set events
 	 * 
@@ -202,4 +228,17 @@ public class XDSRegistryAuditor extends XDSAuditor
 		
 		audit(importEvent);
 	}
+
+    @Deprecated
+    protected void auditRegisterEvent(
+            IHETransactionEventTypeCodes transaction, RFC3881EventOutcomeCodes eventOutcome,
+            String repositoryUserId, String repositoryIpAddress,
+            String userName,
+            String registryEndpointUri,
+            String submissionSetUniqueId,
+            String patientId)
+    {
+        auditRegisterEvent(transaction, eventOutcome, repositoryUserId, repositoryIpAddress, userName,
+                registryEndpointUri, submissionSetUniqueId, patientId, null);
+    }
 }

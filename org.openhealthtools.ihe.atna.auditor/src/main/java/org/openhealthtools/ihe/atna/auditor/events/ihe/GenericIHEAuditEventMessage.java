@@ -63,7 +63,17 @@ public class GenericIHEAuditEventMessage extends GenericAuditEventMessageImpl
 		this.systemIsSource = systemIsSource;	
 		this.eventType = type;
 	}
-	
+
+    @Deprecated
+    public GenericIHEAuditEventMessage(boolean systemIsSource,
+                                       RFC3881EventOutcomeCodes outcome,
+                                       RFC3881EventActionCodes action,
+                                       CodedValueType id,
+                                       IHETransactionEventTypeCodes type)
+    {
+        this(systemIsSource, outcome, action, id, type, null);
+    }
+
 	/**
 	 * Gets whether the system that generated the message is the 
 	 * event source
