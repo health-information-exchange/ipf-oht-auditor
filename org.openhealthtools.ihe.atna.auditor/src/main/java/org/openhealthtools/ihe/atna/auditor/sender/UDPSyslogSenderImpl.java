@@ -15,9 +15,10 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.atna.auditor.events.AuditEventMessage;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simple client implementation of RFC 5426 UDP syslog transport
@@ -39,7 +40,7 @@ public class UDPSyslogSenderImpl extends RFC5424SyslogSenderImpl implements Audi
 	/**
 	 * Logger instance
 	 */
-	private static final Logger LOGGER = Logger.getLogger(UDPSyslogSenderImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UDPSyslogSenderImpl.class);
 	
 	/**
 	 * Default port for this transport

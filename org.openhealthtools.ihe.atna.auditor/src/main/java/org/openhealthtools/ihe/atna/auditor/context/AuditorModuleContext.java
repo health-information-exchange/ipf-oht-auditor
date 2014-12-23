@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.atna.auditor.AuditorFactory;
 import org.openhealthtools.ihe.atna.auditor.IHEAuditor;
 import org.openhealthtools.ihe.atna.auditor.queue.AuditMessageQueue;
@@ -26,6 +25,8 @@ import org.openhealthtools.ihe.atna.auditor.sender.UDPSyslogSenderImpl;
 import org.openhealthtools.ihe.atna.context.AbstractModuleContext;
 import org.openhealthtools.ihe.atna.context.SecurityContext;
 import org.openhealthtools.ihe.atna.context.SecurityContextFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Auditor module context that manages and controls the sending
@@ -45,7 +46,7 @@ public class AuditorModuleContext extends AbstractModuleContext
 	/**
 	 * Logger instance
 	 */
-	public static final Logger LOGGER = Logger.getLogger(AuditorModuleContext.class);
+	public static final Logger LOGGER = LoggerFactory.getLogger(AuditorModuleContext.class);
 	
 	/**
 	 * Context ID for the Auditor Module Context

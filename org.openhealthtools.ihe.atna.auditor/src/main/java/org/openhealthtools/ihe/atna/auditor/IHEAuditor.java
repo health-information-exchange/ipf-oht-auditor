@@ -14,7 +14,6 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.net.InetAddress;
 
-import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.atna.auditor.codes.dicom.DICOMEventTypeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
@@ -27,6 +26,8 @@ import org.openhealthtools.ihe.atna.auditor.events.dicom.ApplicationActivityEven
 import org.openhealthtools.ihe.atna.auditor.events.dicom.ApplicationActivityEvent.ApplicationStopEvent;
 import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract base implementation of the IHE-enabled auditors.
@@ -42,7 +43,7 @@ public class IHEAuditor
 	/**
 	 * Logger instance
 	 */
-	private static final Logger LOGGER = Logger.getLogger(IHEAuditor.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(IHEAuditor.class);
 	
 	/**
 	 * Configuration used by this auditor

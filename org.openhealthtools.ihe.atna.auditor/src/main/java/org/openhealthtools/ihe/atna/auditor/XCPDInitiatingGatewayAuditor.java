@@ -15,13 +15,14 @@ package org.openhealthtools.ihe.atna.auditor;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.atna.auditor.events.ihe.QueryEvent;
 import org.openhealthtools.ihe.atna.auditor.models.rfc3881.CodedValueType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of XCPD IG Auditor
@@ -39,7 +40,7 @@ public class XCPDInitiatingGatewayAuditor extends IHEAuditor
 	/**
 	 * Logger instance
 	 */
-	private static final Logger LOGGER = Logger.getLogger(XCPDInitiatingGatewayAuditor.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(XCPDInitiatingGatewayAuditor.class);
 	
 	/**
 	 * Get an instance of the XCPD Initiating Gateway Auditor from the 

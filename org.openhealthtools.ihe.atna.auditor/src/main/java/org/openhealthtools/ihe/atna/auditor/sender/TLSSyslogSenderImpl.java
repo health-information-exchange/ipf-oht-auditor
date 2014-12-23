@@ -17,10 +17,11 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.HashMap;
 
-import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.atna.auditor.events.AuditEventMessage;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
 import org.openhealthtools.ihe.atna.nodeauth.context.NodeAuthModuleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simple client implementation of RFC 5425 TLS syslog transport
@@ -42,7 +43,7 @@ public class TLSSyslogSenderImpl extends RFC5424SyslogSenderImpl implements Audi
 	/**
 	 * Logger instance
 	 */
-	private static final Logger LOGGER = Logger.getLogger(TLSSyslogSenderImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(TLSSyslogSenderImpl.class);
 	
 	/**
 	 * Default port for this transport
@@ -62,8 +63,6 @@ public class TLSSyslogSenderImpl extends RFC5424SyslogSenderImpl implements Audi
 	 * 
 	 * @param msg Message to send
 	 * @param socket TLS socket to use
-	 * @param destination Destination address to send to
-	 * @param port Destination port to send to
 	 * @throws Exception
 	 */
 	private void send(AuditEventMessage msg, Socket socket) throws Exception

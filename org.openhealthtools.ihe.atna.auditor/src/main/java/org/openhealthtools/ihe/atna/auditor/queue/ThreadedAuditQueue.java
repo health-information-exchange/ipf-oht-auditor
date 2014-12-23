@@ -15,10 +15,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.atna.auditor.events.AuditEventMessage;
 import org.openhealthtools.ihe.atna.auditor.sender.AuditMessageSender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of an audit queue that delivers messages to the audit
@@ -34,7 +35,7 @@ public class ThreadedAuditQueue implements AuditMessageQueue
 	/**
 	 * Logger instance
 	 */
-	private static final Logger LOGGER = Logger.getLogger(ThreadedAuditQueue.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ThreadedAuditQueue.class);
 	
 	/**
 	 * Auditor Module Context to use

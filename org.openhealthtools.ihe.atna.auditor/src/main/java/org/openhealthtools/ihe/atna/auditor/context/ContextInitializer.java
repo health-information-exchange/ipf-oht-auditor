@@ -12,12 +12,14 @@ package org.openhealthtools.ihe.atna.auditor.context;
 
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+
 import org.openhealthtools.ihe.atna.context.AbstractModuleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ContextInitializer {
 
-	private static final Logger LOGGER = Logger.getLogger(ContextInitializer.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ContextInitializer.class);
 
 	public static void initialize(String fileName)
 	{

@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881AuditSourceTypeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881ActiveParticipantCodes.RFC3881NetworkAccessPointTypeCodes;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventActionCodes;
@@ -34,6 +33,8 @@ import org.openhealthtools.ihe.atna.auditor.models.rfc3881.ParticipantObjectIden
 import org.openhealthtools.ihe.atna.auditor.models.rfc3881.TypeValuePairType;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
 import org.openhealthtools.ihe.atna.auditor.utils.TimestampUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract base implementation of an Audit Event Message that can be 
@@ -50,7 +51,7 @@ public abstract class AbstractAuditEventMessageImpl implements AuditEventMessage
 	/**
 	 * Logger instance
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AbstractAuditEventMessageImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractAuditEventMessageImpl.class);
 
 	/**
 	 * Root audit message payload
@@ -80,8 +81,6 @@ public abstract class AbstractAuditEventMessageImpl implements AuditEventMessage
 
 	/**
 	 * Constructor for creating an Audit Event Message
-	 * 
-	 * @param isSource Whether the system is the event source
 	 */
 	protected AbstractAuditEventMessageImpl()
 	{

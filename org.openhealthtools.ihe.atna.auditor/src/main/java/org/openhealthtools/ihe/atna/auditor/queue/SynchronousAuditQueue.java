@@ -12,10 +12,11 @@ package org.openhealthtools.ihe.atna.auditor.queue;
 
 import java.net.InetAddress;
 
-import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.atna.auditor.events.AuditEventMessage;
 import org.openhealthtools.ihe.atna.auditor.sender.AuditMessageSender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of an audit queue that delivers messages to the audit
@@ -27,7 +28,7 @@ import org.openhealthtools.ihe.atna.auditor.sender.AuditMessageSender;
 public class SynchronousAuditQueue implements AuditMessageQueue
 {
 	private static final Logger LOGGER =
-		Logger.getLogger(SynchronousAuditQueue.class);
+		LoggerFactory.getLogger(SynchronousAuditQueue.class);
 	/**
 	 * The context to use in this audit queue
 	 */

@@ -10,10 +10,11 @@
  *******************************************************************************/
 package org.openhealthtools.ihe.atna.auditor;
 
-import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleConfig;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.atna.auditor.context.ContextInitializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Factory class to instantiate and configure actor-specific
@@ -27,7 +28,7 @@ public final class AuditorFactory
 	/**
 	 * Logger Instance
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AuditorFactory.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AuditorFactory.class);
 	
 	/**
 	 * Get an auditor instance for the specified auditor class, 
@@ -55,7 +56,7 @@ public final class AuditorFactory
 	 * will use a standalone context if a non-global context is requested. 
 	 * 
 	 * @param clazz	Class to instantiate
-	 * @param configToUse Auditor configuration to use
+	 * @param config Auditor configuration to use
 	 * @param useGlobalContext Whether to use the global (true) or standalone (false) context
 	 * @return Instance of an IHE Auditor
 	 */

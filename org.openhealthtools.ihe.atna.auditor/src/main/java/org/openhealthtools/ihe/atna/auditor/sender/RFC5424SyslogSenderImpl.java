@@ -14,10 +14,11 @@ package org.openhealthtools.ihe.atna.auditor.sender;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 
-import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.atna.auditor.events.AuditEventMessage;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
 import org.openhealthtools.ihe.atna.auditor.utils.TimestampUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simple base client implementation of RFC 5424 syslog 
@@ -41,7 +42,7 @@ public class RFC5424SyslogSenderImpl
 	/**
 	 * Logger instance
 	 */
-	private static final Logger LOGGER = Logger.getLogger(RFC5424SyslogSenderImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RFC5424SyslogSenderImpl.class);
 	
 	/**
 	 * Default syslog priority for this transport

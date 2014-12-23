@@ -14,10 +14,11 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.atna.auditor.events.AuditEventMessage;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
 import org.openhealthtools.ihe.atna.auditor.utils.TimestampUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simple client implementation of RFC 3164 / BSD syslog 
@@ -39,7 +40,7 @@ public class BSDSyslogSenderImpl implements AuditMessageSender
 	/**
 	 * Logger instance
 	 */
-	private static final Logger LOGGER = Logger.getLogger(BSDSyslogSenderImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(BSDSyslogSenderImpl.class);
 	
 	/**
 	 * Default port for this transport
