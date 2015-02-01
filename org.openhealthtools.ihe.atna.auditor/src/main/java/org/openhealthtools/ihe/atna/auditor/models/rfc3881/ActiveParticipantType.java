@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
 
 
@@ -86,7 +86,7 @@ public class ActiveParticipantType {
     		hasChildElement = true;
     	}
     	
-    	StringBuffer sb = new StringBuffer();
+    	StringBuilder sb = new StringBuilder();
     	
     	if (useSpacing) {
     		sb.append("\n");
@@ -97,20 +97,20 @@ public class ActiveParticipantType {
     	//UserID
     	sb.append(" UserID=\"");
     	if (userID != null) {
-    		sb.append(StringEscapeUtils.escapeXml(userID));
+    		sb.append(StringEscapeUtils.escapeXml10(userID));
     	}
     	sb.append("\"");
 
     	//AlternativeUserID
     	if (alternativeUserID != null) {
 	    	sb.append(" AlternativeUserID=\"");
-	    	sb.append(StringEscapeUtils.escapeXml(alternativeUserID));
+	    	sb.append(StringEscapeUtils.escapeXml10(alternativeUserID));
 	    	sb.append("\"");
     	}
     	//UserName
     	if (userName != null) {
 	    	sb.append(" UserName=\"");
-	    	sb.append(StringEscapeUtils.escapeXml(userName));
+	    	sb.append(StringEscapeUtils.escapeXml10(userName));
 	    	sb.append("\"");
     	}
     	//UserIsRequestor
@@ -121,7 +121,7 @@ public class ActiveParticipantType {
     	//NetworkAccessPointID
     	if (networkAccessPointID != null) {
 	    	sb.append(" NetworkAccessPointID=\"");
-	    	sb.append(StringEscapeUtils.escapeXml(networkAccessPointID));
+	    	sb.append(StringEscapeUtils.escapeXml10(networkAccessPointID));
 	    	sb.append("\"");
     	}
     	

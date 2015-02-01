@@ -19,7 +19,7 @@
 
 package org.openhealthtools.ihe.atna.auditor.models.rfc3881;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
 
 
@@ -53,18 +53,18 @@ public class TypeValuePairType {
     
     public String toString(String tagName, boolean useSpacing)
     {
-    	StringBuffer sb = new StringBuffer();
+    	StringBuilder sb = new StringBuilder();
     	sb.append("<"+ tagName);
     	//type
     	if (type != null) {
 	    	sb.append(" type=\"");
-	    	sb.append(StringEscapeUtils.escapeXml(type));
+	    	sb.append(StringEscapeUtils.escapeXml10(type));
 	    	sb.append("\"");
     	}
     	//value
     	if (value != null) {
 	    	sb.append(" value=\"");
-	    	sb.append(StringEscapeUtils.escapeXml(new String(value)));
+	    	sb.append(StringEscapeUtils.escapeXml10(new String(value)));
 	    	sb.append("\"");
     	}
     	sb.append("/>");

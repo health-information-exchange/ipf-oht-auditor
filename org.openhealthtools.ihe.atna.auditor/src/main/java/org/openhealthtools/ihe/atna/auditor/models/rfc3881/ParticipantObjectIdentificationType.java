@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
 
 
@@ -179,7 +179,7 @@ public class ParticipantObjectIdentificationType {
     		hasChildElement = true;
     	}
     	
-    	StringBuffer sb = new StringBuffer();
+    	StringBuilder sb = new StringBuilder();
     	if (useSpacing) {
     		sb.append("\n");
     	}
@@ -189,7 +189,7 @@ public class ParticipantObjectIdentificationType {
     	sb.append(" ParticipantObjectID=\"");
     	
     	if (!EventUtils.isEmptyOrNull(participantObjectID)) {
-    		sb.append(StringEscapeUtils.escapeXml(participantObjectID));
+    		sb.append(StringEscapeUtils.escapeXml10(participantObjectID));
     	}
     	sb.append("\"");
     	
@@ -214,7 +214,7 @@ public class ParticipantObjectIdentificationType {
     	//ParticipantObjectSensitivity
     	if (participantObjectSensitivity != null) {
 	    	sb.append(" ParticipantObjectSensitivity=\"");
-	    	sb.append(StringEscapeUtils.escapeXml(participantObjectSensitivity));
+	    	sb.append(StringEscapeUtils.escapeXml10(participantObjectSensitivity));
 	    	sb.append("\"");
     	}
     	
@@ -233,7 +233,7 @@ public class ParticipantObjectIdentificationType {
     	    		sb.append("\n");
     	    	}
     			sb.append("<ParticipantObjectName>");
-    			sb.append(StringEscapeUtils.escapeXml(participantObjectName));
+    			sb.append(StringEscapeUtils.escapeXml10(participantObjectName));
     			sb.append("</ParticipantObjectName>");
     		}
     		if (!EventUtils.isEmptyOrNull(participantObjectQuery)) {
@@ -241,7 +241,7 @@ public class ParticipantObjectIdentificationType {
     	    		sb.append("\n");
     	    	}
     			sb.append("<ParticipantObjectQuery>");
-    			sb.append(StringEscapeUtils.escapeXml(new String(EventUtils.encodeBase64(participantObjectQuery))));
+    			sb.append(StringEscapeUtils.escapeXml10(new String(EventUtils.encodeBase64(participantObjectQuery))));
     			sb.append("</ParticipantObjectQuery>");
     		}
 //            if (EventUtils.isEmptyOrNull(participantObjectName) && EventUtils.isEmptyOrNull(participantObjectQuery)) {

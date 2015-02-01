@@ -19,7 +19,7 @@
 
 package org.openhealthtools.ihe.atna.auditor.models.rfc3881;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 
 /**
@@ -87,16 +87,16 @@ public class AuditSourceIdentificationType {
             sb.append(" code=\"9\"");       // use "other" as the default event source type
         } else {
             sb.append(" code=\"")
-              .append(StringEscapeUtils.escapeXml(auditSourceTypeCode.getCode()))
+              .append(StringEscapeUtils.escapeXml10(auditSourceTypeCode.getCode()))
               .append('"');
             if (auditSourceTypeCode.getCodeSystemName() != null) {
                 sb.append(" codeSystemName=\"")
-                  .append(StringEscapeUtils.escapeXml(auditSourceTypeCode.getCodeSystemName()))
+                  .append(StringEscapeUtils.escapeXml10(auditSourceTypeCode.getCodeSystemName()))
                   .append('"');
             }
             if (auditSourceTypeCode.getOriginalText() != null) {
                 sb.append(" originalText=\"")
-                  .append(StringEscapeUtils.escapeXml(auditSourceTypeCode.getOriginalText()))
+                  .append(StringEscapeUtils.escapeXml10(auditSourceTypeCode.getOriginalText()))
                   .append('"');
             }
         }
@@ -104,14 +104,14 @@ public class AuditSourceIdentificationType {
     	//AuditEnterpriseSiteID
     	if (auditEnterpriseSiteID != null) {
 	    	sb.append(" AuditEnterpriseSiteID=\"");
-	    	sb.append(StringEscapeUtils.escapeXml(auditEnterpriseSiteID));
+	    	sb.append(StringEscapeUtils.escapeXml10(auditEnterpriseSiteID));
 	    	sb.append("\"");
     	}
 
     	//AuditSourceID
         sb.append(" AuditSourceID=\"");
         if ((auditSourceID != null) && ! auditSourceID.isEmpty()) {
-            sb.append(StringEscapeUtils.escapeXml(auditSourceID));
+            sb.append(StringEscapeUtils.escapeXml10(auditSourceID));
         } else {
             sb.append("unknown");
         }

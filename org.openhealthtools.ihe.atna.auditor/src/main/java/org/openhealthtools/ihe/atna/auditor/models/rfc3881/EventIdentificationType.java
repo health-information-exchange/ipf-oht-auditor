@@ -26,7 +26,7 @@ import java.util.List;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.openhealthtools.ihe.atna.auditor.utils.EventUtils;
 
 
@@ -91,18 +91,18 @@ public class EventIdentificationType {
 
 	public String toString(boolean useSpacing)
 	{
-    	StringBuffer sb = new StringBuffer();
+    	StringBuilder sb = new StringBuilder();
     	if (useSpacing) {
     		sb.append("\n");
     	}
     	sb.append("<EventIdentification");
     	//EventActionCode
     	sb.append(" EventActionCode=\"");
-    	sb.append(StringEscapeUtils.escapeXml(eventActionCode));
+    	sb.append(StringEscapeUtils.escapeXml10(eventActionCode));
     	sb.append("\"");
     	//EventDateTime
     	sb.append(" EventDateTime=\"");
-    	sb.append(StringEscapeUtils.escapeXml(eventDateTime));
+    	sb.append(StringEscapeUtils.escapeXml10(eventDateTime));
     	sb.append("\"");
     	//EventOutcomeIndicator
     	sb.append(" EventOutcomeIndicator=\"");

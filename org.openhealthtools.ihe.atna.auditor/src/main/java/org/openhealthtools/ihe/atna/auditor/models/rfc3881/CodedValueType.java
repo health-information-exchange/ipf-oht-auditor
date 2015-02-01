@@ -19,7 +19,7 @@
 
 package org.openhealthtools.ihe.atna.auditor.models.rfc3881;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 
 
@@ -60,7 +60,7 @@ public class CodedValueType {
     
     public String toString(String tagName)
     {
-    	StringBuffer sb = new StringBuffer();
+    	StringBuilder sb = new StringBuilder();
     	sb.append("<"+ tagName);
     	//code
     	sb.append(" csd-code=\"");
@@ -70,20 +70,20 @@ public class CodedValueType {
     	//originalText
     	if (originalText != null) {
 	    	sb.append(" originalText=\"");
-	    	sb.append(StringEscapeUtils.escapeXml(originalText));
+	    	sb.append(StringEscapeUtils.escapeXml10(originalText));
 	    	sb.append("\"");
     	}
 
     	//codeSystem
     	if (codeSystem != null) {
 	    	sb.append(" codeSystem=\"");
-	    	sb.append(StringEscapeUtils.escapeXml(codeSystem));
+	    	sb.append(StringEscapeUtils.escapeXml10(codeSystem));
 	    	sb.append("\"");
     	}
     	//codeSystemName
     	if (codeSystemName != null) {
 	    	sb.append(" codeSystemName=\"");
-	    	sb.append(StringEscapeUtils.escapeXml(codeSystemName));
+	    	sb.append(StringEscapeUtils.escapeXml10(codeSystemName));
 	    	sb.append("\"");
     	}
     	
