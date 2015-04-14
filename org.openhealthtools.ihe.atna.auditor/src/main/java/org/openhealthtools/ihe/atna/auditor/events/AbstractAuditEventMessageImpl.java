@@ -182,8 +182,7 @@ public abstract class AbstractAuditEventMessageImpl implements AuditEventMessage
 	 */
 	public byte[] getSerializedMessage(boolean useSpacing)
 	{
-		byte[] buf = auditMessage.toString(useSpacing).getBytes();
-		return buf;
+        return auditMessage.toString(useSpacing).getBytes();
 	}
 
 	

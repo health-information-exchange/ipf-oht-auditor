@@ -72,9 +72,9 @@ public abstract class PIXAuditor extends IHEAuditor
 		queryEvent.addDestinationActiveParticipant(EventUtils.concatHL7FacilityApplication(destinationFacility,destinationApp), destinationAltUserId, null, destinationNetworkId, false);
 		// Add a patient participant object for each patient id
 		if (!EventUtils.isEmptyOrNull(patientIds)) {
-			for (int i=0; i<patientIds.length; i++) {
-				queryEvent.addPatientParticipantObject(patientIds[i]);
-			}
+            for (String patientId : patientIds) {
+                queryEvent.addPatientParticipantObject(patientId);
+            }
 		}
 		
 		byte[] queryParamsBytes = null, msgControlBytes = null;
@@ -134,9 +134,9 @@ public abstract class PIXAuditor extends IHEAuditor
 		patientEvent.addDestinationActiveParticipant(EventUtils.concatHL7FacilityApplication(destinationFacility,destinationApp), destinationAltUserId, null, destinationNetworkId, false);
 		// Add a patient participant object for each patient id
 		if (!EventUtils.isEmptyOrNull(patientIds)) {
-			for (int i=0; i<patientIds.length; i++) {
-				patientEvent.addPatientParticipantObject(patientIds[i], hl7MessageId.getBytes(), transaction);
-			}
+            for (String patientId : patientIds) {
+                patientEvent.addPatientParticipantObject(patientId, hl7MessageId.getBytes(), transaction);
+            }
 		}
 
 		audit(patientEvent);

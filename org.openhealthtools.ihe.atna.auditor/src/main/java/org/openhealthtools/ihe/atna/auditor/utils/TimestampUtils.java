@@ -35,7 +35,7 @@ public class TimestampUtils {
 	public static String getRFC3881Timestamp(Date date)
 	{
 		
-		StringBuffer formattedDate = new StringBuffer(RFC3881_DATE_FORMATTER.format(date));
+		StringBuilder formattedDate = new StringBuilder(RFC3881_DATE_FORMATTER.format(date));
 		formattedDate.insert((formattedDate.length()-2), ':');
 		return formattedDate.toString();
 	}
@@ -46,7 +46,7 @@ public class TimestampUtils {
 	}
     public static String getBSDSyslogDate(Date date)
     {
-    	StringBuffer sb = new StringBuffer(BSDSYSLOG_DATE_FORMATTER.format(date));
+    	StringBuilder sb = new StringBuilder(BSDSYSLOG_DATE_FORMATTER.format(date));
     	if (sb.charAt(4) == '0') {
     		sb.setCharAt(4, ' ');
     	}

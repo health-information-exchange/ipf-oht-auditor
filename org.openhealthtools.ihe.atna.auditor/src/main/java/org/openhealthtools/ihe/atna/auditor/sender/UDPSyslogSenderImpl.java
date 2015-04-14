@@ -119,11 +119,11 @@ public class UDPSyslogSenderImpl extends RFC5424SyslogSenderImpl implements Audi
 	{
         if (!EventUtils.isEmptyOrNull(msgs)) {
         	DatagramSocket socket = new DatagramSocket();
-    		for (int i=0; i<msgs.length; i++) {
-    			if (!EventUtils.isEmptyOrNull(msgs[i])) {
-    				send(msgs[i], socket, msgs[i].getDestinationAddress(), msgs[i].getDestinationPort());
-    			}
-    		}
+            for (AuditEventMessage msg : msgs) {
+                if (!EventUtils.isEmptyOrNull(msg)) {
+                    send(msg, socket, msg.getDestinationAddress(), msg.getDestinationPort());
+                }
+            }
            socket.close();
         }
 	}
@@ -139,10 +139,10 @@ public class UDPSyslogSenderImpl extends RFC5424SyslogSenderImpl implements Audi
         	
         	DatagramSocket socket = new DatagramSocket();
 
-    		for (int i=0; i<msgs.length; i++) {
-    			byte[] msgBytes = getTransportPayload(msgs[i]);
-    			send(msgBytes, socket, destination, portToUse);
-    		}
+            for (AuditEventMessage msg : msgs) {
+                byte[] msgBytes = getTransportPayload(msg);
+                send(msgBytes, socket, destination, portToUse);
+            }
            socket.close();
         }
 	}

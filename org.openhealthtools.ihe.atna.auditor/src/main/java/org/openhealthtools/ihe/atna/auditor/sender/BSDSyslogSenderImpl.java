@@ -129,11 +129,11 @@ public class BSDSyslogSenderImpl implements AuditMessageSender
 	{
         if (!EventUtils.isEmptyOrNull(msgs)) {
         	DatagramSocket socket = new DatagramSocket();
-    		for (int i=0; i<msgs.length; i++) {
-    			if (!EventUtils.isEmptyOrNull(msgs[i])) {
-    				send(msgs[i], socket, msgs[i].getDestinationAddress(), msgs[i].getDestinationPort());
-    			}
-    		}
+            for (AuditEventMessage msg : msgs) {
+                if (!EventUtils.isEmptyOrNull(msg)) {
+                    send(msg, socket, msg.getDestinationAddress(), msg.getDestinationPort());
+                }
+            }
            socket.close();
         }
 	}
@@ -149,10 +149,10 @@ public class BSDSyslogSenderImpl implements AuditMessageSender
         	
         	DatagramSocket socket = new DatagramSocket();
 
-    		for (int i=0; i<msgs.length; i++) {
-    			byte[] msgBytes = getTransportPayload(msgs[i]);
-    			send(msgBytes, socket, destination, portToUse);
-    		}
+            for (AuditEventMessage msg : msgs) {
+                byte[] msgBytes = getTransportPayload(msg);
+                send(msgBytes, socket, destination, portToUse);
+            }
            socket.close();
         }
 	}
@@ -205,19 +205,8 @@ public class BSDSyslogSenderImpl implements AuditMessageSender
 		}
 		
 		// Format message with transport-specific headers
-		StringBuffer sb = new StringBuffer();
-		sb.append("<");
-		sb.append(TRANSPORT_DEFAULT_PRIORITY);
-		sb.append(">");
-		
-		sb.append(TimestampUtils.getBSDSyslogDate(msg.getDateTime()));
-		sb.append(" ");
-		sb.append(getSystemHostName());
-		sb.append(" ");
-		sb.append("<?xml version=\"1.0\" encoding=\"ASCII\"?>");
-		sb.append(new String(msgBytes));
 
-		return sb.toString().trim().getBytes();
+        return ("<" + TRANSPORT_DEFAULT_PRIORITY + ">" + TimestampUtils.getBSDSyslogDate(msg.getDateTime()) + " " + getSystemHostName() + " " + "<?xml version=\"1.0\" encoding=\"ASCII\"?>" + new String(msgBytes)).trim().getBytes();
 	}
 	
 	/**

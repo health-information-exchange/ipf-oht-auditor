@@ -54,7 +54,7 @@ public class TypeValuePairType {
     public String toString(String tagName, boolean useSpacing)
     {
     	StringBuilder sb = new StringBuilder();
-    	sb.append("<"+ tagName);
+    	sb.append("<").append(tagName);
     	//type
     	if (type != null) {
 	    	sb.append(" type=\"");

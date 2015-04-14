@@ -61,7 +61,7 @@ public class CodedValueType {
     public String toString(String tagName)
     {
     	StringBuilder sb = new StringBuilder();
-    	sb.append("<"+ tagName);
+    	sb.append("<").append(tagName);
     	//code
     	sb.append(" csd-code=\"");
     	sb.append(code);

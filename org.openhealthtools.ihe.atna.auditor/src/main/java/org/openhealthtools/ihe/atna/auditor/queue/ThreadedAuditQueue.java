@@ -149,7 +149,7 @@ public class ThreadedAuditQueue implements AuditMessageQueue
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e) {
-
+                    // ok
 				}
 				if (!msgs.isEmpty()) {
 					if (LOGGER.isDebugEnabled()) {

@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  */
 public class TLSSyslogSenderImpl extends RFC5424SyslogSenderImpl implements AuditMessageSender
 {
-	private static HashMap<String, Socket> socketMap = new HashMap<String, Socket>();
+	private static final HashMap<String, Socket> socketMap = new HashMap<>();
 
 	/**
 	 * Logger instance
@@ -87,6 +87,7 @@ public class TLSSyslogSenderImpl extends RFC5424SyslogSenderImpl implements Audi
        }
 
        // multiple threads can get a pointer to the socket but only one should write at a time
+        // TODO don#t synchronize on local variable
        synchronized (socket){
     	   try{
 		       OutputStream out = socket.getOutputStream();
@@ -134,12 +135,12 @@ public class TLSSyslogSenderImpl extends RFC5424SyslogSenderImpl implements Audi
 	{
         if (!EventUtils.isEmptyOrNull(msgs)) {
 
-    		for (int i=0; i<msgs.length; i++) {
-    			if (!EventUtils.isEmptyOrNull(msgs[i])) {
-    	    		Socket s = getTLSSocket(msgs[i].getDestinationAddress(), msgs[i].getDestinationPort());
-    				send(msgs[i], s);
-    			}
-    		}
+            for (AuditEventMessage msg : msgs) {
+                if (!EventUtils.isEmptyOrNull(msg)) {
+                    Socket s = getTLSSocket(msg.getDestinationAddress(), msg.getDestinationPort());
+                    send(msg, s);
+                }
+            }
     		
     		//TODO: tear down the TLS transport socket, if needed
         }
@@ -153,9 +154,9 @@ public class TLSSyslogSenderImpl extends RFC5424SyslogSenderImpl implements Audi
         if (!EventUtils.isEmptyOrNull(msgs)) {
     		Socket s = getTLSSocket(destination, port);
 
-    		for (int i=0; i<msgs.length; i++) {
-				send(msgs[i], s);
-    		}
+            for (AuditEventMessage msg : msgs) {
+                send(msg, s);
+            }
     		
     		//TODO: tear down the TLS transport socket, if needed
         }
