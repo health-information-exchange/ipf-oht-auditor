@@ -88,7 +88,14 @@ public final class AuditorFactory
 	{
 		AuditorModuleConfig config = AuditorModuleContext.getContext().getConfig();
 		if (!useGlobalConfig) {
-			config = config.clone();
+			try
+			{
+				config = config.clone();
+			}
+			catch (CloneNotSupportedException e)
+			{
+				//TODO: Now what?
+			}
 		}
 
 		return getAuditor(clazz, config, useGlobalContext);
