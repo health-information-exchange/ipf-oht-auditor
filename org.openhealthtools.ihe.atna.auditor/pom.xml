@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.openhealthtools.ihe.atna.auditor</artifactId>
-    <version>${project.parent.version}-p5</version>
+    <version>${project.parent.version}-topicus-SNAPSHOT</version>
     <name>org.openhealthtools.ihe.atna.auditor</name>
 
     <parent>
@@ -10,6 +10,27 @@
         <artifactId>org.openhealthtools.ihe</artifactId>
         <version>2.0.0</version>
     </parent>
+    
+    <distributionManagement>
+		<repository>
+			<id>deployment.external</id>
+			<name>external Release Repository</name>
+			<url>https://vaatwasser.topicuszorg.nl/nexus/content/repositories/external-releases/</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+		<snapshotRepository>
+			<id>deployment.external</id>
+			<name>external snapshot Repository</name>
+			<url>https://vaatwasser.topicuszorg.nl/nexus/content/repositories/external-snapshot/</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
+	
+	<scm>
+        <connection>scm:git:git://github.com/TopicusZorg/ipf-oht-auditor.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/TopicusZorg/ipf-oht-auditor.git</developerConnection>
+        <url>https://github.com/TopicusZorg/ipf-oht-auditor</url>
+    </scm>
 	
 	<properties>
         <osgi.export.pkg>org.openhealthtools.ihe.atna.auditor.*</osgi.export.pkg>
